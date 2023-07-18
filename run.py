@@ -18,6 +18,8 @@ class Decisions(Enum):
     YES = 'Y'
     NO = 'N'
 
+#class Player_info(Enum):
+
 class ChernobylSurvivalGame:
     def __init__(self):
         pass
@@ -119,7 +121,24 @@ class ChernobylSurvivalGame:
                     break
 
     def forest(self):
-        print("Hello, you have reached the forest.")
+        print("You have walked beyond the city limits to a dense forest tainted by radiation. The trees stand twisted and sickly, their leaves discolored and wilted. The air is heavy with an acrid smell, and eerie glowing fungi dot the forest floor, casting an otherworldly glow.\n")
+        print("Walking through the forest, you hear a mysterious sound coming from deep within, what do you do?")
+        while True:
+            forest_decision =  input("Options: Follow the sound, explore the forest, build a shelter (1,2,3)\n")
+            match forest_decision:
+                case "1":
+                    print("cave")
+                    break
+                case "2":
+                    print("field")
+                    break
+                case "3":
+                    print("clue")
+                    break
+                case _:
+                    print("Have you forgotten how to spell too? Try again...")
+                    
+
 
     def city(self):
         print("Hello, you have reached the city.")
