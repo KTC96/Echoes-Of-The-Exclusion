@@ -1,3 +1,12 @@
+import enum
+player_weapon = False
+
+class Direction(enum.Enum):
+    NORTH = 'N'
+    EAST = 'E'
+    SOUTH = 'S'
+    WEST = 'W'
+
 class ChernobylSurvivalGame:
     def __init__(self):
         pass
@@ -25,23 +34,23 @@ class ChernobylSurvivalGame:
         print("As you rise to your feet, a mixture of awe and unease fills your heart.\nThe haunting silence and eerie atmosphere of the exclusion zone envelop you.\nNature has reclaimed its territory, with overgrown vegetation and crumbling structures standing as testament to the past.\n")
         while True:
             print(f"So {self.player_name}, which way would you like to head first?\n")
-            directions = ["north", "east", "south", "west"]
-            player_input = input("Options: north/south/east/west").lower().strip()
-            if player_input == "north":
+            player_input = input("Options: N/E/S/W").upper().strip()
+
+            if player_input == Direction.NORTH.value:
                 self.power_plant()
                 break
-            elif player_input == "east":
+            elif player_input == Direction.EAST.value:
                 self.forest()
                 break
-            elif player_input == "south":
+            elif player_input == Direction.SOUTH.value:
                 self.city()
                 break
-            elif player_input == "west":
+            elif player_input == Direction.WEST.value:
                 self.hospital()
                 break
             else:
                 print("Have you forgotten how to spell too? Enter a valid direction...")
-                break
+                
     
     def start_zone_return(self):
         
@@ -73,7 +82,7 @@ class ChernobylSurvivalGame:
                 print("monster fight")
                 """
                 Add logic later
-                if self_player_weapon == True:
+                if player_weapon == True:
                     print("You kill monster and win the game")
                 else:
                     print("you die")
