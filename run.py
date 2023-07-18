@@ -26,10 +26,14 @@ class ChernobylSurvivalGame:
             else:
                 print("I did not understand that")
                 
-                
+    def player_name(self):
+        return input("Can you remember your name? (Enter name)\n").strip()
+           
+
+
     def start_zone(self):
         print("As you slowly regain consciousness, the world around you comes into focus.\n The air feels heavy, carrying a sense of decay and abandonment.\nYou find yourself lying on the cold, damp ground, surrounded by the remnants of what was once a bustling town.\n")
-        self.player_name = input("Can you remember your name? (Enter name)\n").strip()
+        self.player_name = self.player_name()
         print(f"Good luck surviving the apocalypse {self.player_name}\n")
         print("As you rise to your feet, a mixture of awe and unease fills your heart.\nThe haunting silence and eerie atmosphere of the exclusion zone envelop you.\nNature has reclaimed its territory, with overgrown vegetation and crumbling structures standing as testament to the past.\n")
         while True:
