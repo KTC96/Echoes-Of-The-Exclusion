@@ -23,14 +23,20 @@ class ChernobylSurvivalGame:
         pass
 
     def get_user_input(self, prompt, valid_options):
+        """
+        Utility function to validate and return user input
+        """
         while True:
             user_input = input(prompt).upper().strip()
             if user_input in valid_options:
                 return user_input
             else:
-                print("Invalid input. Please try again.")
+                print("Have you forgotten how to spell too? Try again...")
 
     def game_introduction(self):
+        """
+        Asks the player if they want to play or not
+        """
         while True:
             decision = self.get_user_input("Would you like to play? (Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
             match decision:
@@ -40,9 +46,7 @@ class ChernobylSurvivalGame:
                 case Decisions.NO.value:
                     print("Understood, you are not ready for the challenge...")
                     break
-                case _:
-                    print("I did not understand that")
-
+                
     def get_player_name(self):
         return input("Can you remember your name? (Enter name)\n").strip()
 
@@ -67,8 +71,7 @@ class ChernobylSurvivalGame:
                 case Direction.WEST.value:
                     self.hospital()
                     break
-                case _:
-                    print("Have you forgotten how to spell too? Enter a valid direction...")
+               
 
     def start_zone_return(self):
         print("You return to where you started, not much has changed...")
@@ -89,8 +92,6 @@ class ChernobylSurvivalGame:
                 case Direction.WEST.value:
                     self.hospital()
                     break
-                case _:
-                    print("Have you forgotten how to spell too? Enter a valid direction...")
 
     def power_plant(self):
         print("The heart of the disaster, the abandoned power plant looms in the distance, its towering smokestacks and crumbling reactors a haunting reminder of the catastrophic event. It emits an unsettling aura, and caution is advised when venturing too close.\n")
@@ -103,8 +104,6 @@ class ChernobylSurvivalGame:
                 case Decisions.NO.value:
                     self.return_to_start_zone()
                     break
-                case _:
-                    print("Have you forgotten how to spell too? Enter a valid decision...")
 
     def monster_fight(self):
         print("monster fight")
@@ -118,8 +117,6 @@ class ChernobylSurvivalGame:
                 case Direction.SOUTH.value:
                     self.start_zone_return()
                     break
-                case _:
-                    print("Have you forgotten how to spell too? Enter a valid direction...")
 
     def forest(self):
         print("Hello, you have reached the forest.")
