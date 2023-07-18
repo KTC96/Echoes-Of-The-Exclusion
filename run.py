@@ -7,6 +7,10 @@ class Direction(enum.Enum):
     SOUTH = 'S'
     WEST = 'W'
 
+class Decisions(enum.Enum):
+    YES = 'Y'
+    NO = 'N'
+
 class ChernobylSurvivalGame:
     def __init__(self):
         pass
@@ -16,20 +20,20 @@ class ChernobylSurvivalGame:
         Function to introduce the game and ask the user if they would like to play.
         """
         while True:
-            play_decision = input("Would you like to play? (yes/no)\n")
-            if play_decision.lower().strip() == "yes":
-                self.start_zone()
-                break
-            elif play_decision.lower().strip() == "no":
-                print("Understood, you are not ready for the challenge...")
-                break
-            else:
-                print("I did not understand that")
+            decision = input("Would you like to play? (Y/N)\n").upper().strip()
+            match decision:
+                case Decisions.YES.value:
+                    self.start_zone()
+                    break
+                case Decisions.NO.value:
+                    print("Understood, you are not ready for the challenge...")
+                    break
+                case _:
+                    print("I did not understand that")
                 
     def player_name(self):
         return input("Can you remember your name? (Enter name)\n").strip()
            
-
 
     def start_zone(self):
         print("As you slowly regain consciousness, the world around you comes into focus.\n The air feels heavy, carrying a sense of decay and abandonment.\nYou find yourself lying on the cold, damp ground, surrounded by the remnants of what was once a bustling town.\n")
@@ -40,70 +44,70 @@ class ChernobylSurvivalGame:
             print(f"So {self.player_name}, which way would you like to head first?\n")
             player_input = input("Options: N/E/S/W").upper().strip()
 
-            if player_input == Direction.NORTH.value:
-                self.power_plant()
-                break
-            elif player_input == Direction.EAST.value:
-                self.forest()
-                break
-            elif player_input == Direction.SOUTH.value:
-                self.city()
-                break
-            elif player_input == Direction.WEST.value:
-                self.hospital()
-                break
-            else:
-                print("Have you forgotten how to spell too? Enter a valid direction...")
+            match player_input: 
+                case Direction.NORTH.value:
+                    self.power_plant()
+                    break
+                case Direction.EAST.value:
+                    self.forest()
+                    break
+                case Direction.SOUTH.value:
+                    self.city()
+                    break
+                case Direction.WEST.value:
+                    self.hospital()
+                    break
+                case _:
+                    print("Have you forgotten how to spell too? Enter a valid direction...")
                 
     
     def start_zone_return(self):
-        
-            print("You return to where you started, not much has changed...")
-            print(f"So {self.player_name}, which way would you like to head?\n")
-            while True:
-                directions = ["north", "east", "south", "west"]
-                player_input = input("Options: north/south/east/west").lower().strip()
-                if player_input == "north":
+        print("You return to where you started, not much has changed...")
+        print(f"So {self.player_name}, which way would you like to head?\n")
+
+        while True:
+            player_input = input("Options: N/E/S/W").upper().strip()
+            match player_input: 
+                case Direction.NORTH.value:
                     self.power_plant()
                     break
-                elif player_input == "east":
+                case Direction.EAST.value:
                     self.forest()
                     break
-                elif player_input == "south":
+                case Direction.SOUTH.value:
                     self.city()
                     break
-                elif player_input == "west":
+                case Direction.WEST.value:
                     self.hospital()
                     break
-                else:
+                case _:
                     print("Have you forgotten how to spell too? Enter a valid direction...")
+
     
     def power_plant(self):
         print("The heart of the disaster, the abandoned power plant looms in the distance, its towering smokestacks and crumbling reactors a haunting reminder of the catastrophic event. It emits an unsettling aura, and caution is advised when venturing too close.\n")
         power_plant_input = input("You see something scuttling in the shadows, do you investigate? (Y/N)\n").lower().strip()
         while True:
-            if power_plant_input == "yes":
-                print("monster fight")
-                """
-                Add logic later
-                if player_weapon == True:
-                    print("You kill monster and win the game")
-                else:
-                    print("you die")
+            match power_plant_input:
+                case Decisions.YES.value:
+                    print("monster fight")
                     """
-                
-            elif power_plant_input == "no":
-                directions = ["south"]
-                print(f"So {self.player_name}, which way would you like to head?\n")
-                direction_input = input("Options: south").lower().strip()
-                if direction_input == "south":
-                    self.start_zone_return()
-                    break
-                else:
-                    print("Have you forgotten how to spell too? Enter a valid direction...")
-                    
-            else:
-                print("Have you forgotten how to spell too? Enter a valid direction...")
+                    Add logic later
+                    if player_weapon == True:
+                        print("You kill monster and win the game")
+                     else:
+                        print("you die")
+                    """
+
+                case Decisions.NO.value:
+                    print(f"So {self.player_name}, which way would you like to head?\n")
+                    player_input = input("Options: S").lower().strip()
+                    match player_input:
+                        case Direction.SOUTH.value:
+                            self.start_zone_return()
+                            break
+                        case _:
+                            print("Have you forgotten how to spell too? Enter a valid direction...")
                 
     
     def forest(self):
