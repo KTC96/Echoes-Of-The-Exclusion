@@ -1,12 +1,20 @@
 from enum import Enum
 
 class Direction(Enum):
+    """
+    Enum "constant" class for holidng values for directions in the game
+    """
+    
     NORTH = 'N'
     EAST = 'E'
     SOUTH = 'S'
     WEST = 'W'
 
 class Decisions(Enum):
+    """
+    Enum "constant" class for holding Y/N decisions in the game
+    """
+
     YES = 'Y'
     NO = 'N'
 
@@ -14,9 +22,17 @@ class ChernobylSurvivalGame:
     def __init__(self):
         pass
 
+    def get_user_input(self, prompt, valid_options):
+        while True:
+            user_input = input(prompt).upper().strip()
+            if user_input in valid_options:
+                return user_input
+            else:
+                print("Invalid input. Please try again.")
+
     def game_introduction(self):
         while True:
-            decision = input("Would you like to play? (Y/N)\n").upper().strip()
+            decision = self.get_user_input("Would you like to play? (Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
             match decision:
                 case Decisions.YES.value:
                     self.start_zone()
@@ -35,33 +51,31 @@ class ChernobylSurvivalGame:
         self.player_name_input = self.get_player_name()
         print(f"Good luck surviving the apocalypse {self.player_name_input}\n")
         print("As you rise to your feet, a mixture of awe and unease fills your heart.\nThe haunting silence and eerie atmosphere of the exclusion zone envelop you.\nNature has reclaimed its territory, with overgrown vegetation and crumbling structures standing as testament to the past.\n")
-
+        print(f"So {self.player_name_input}, which way would you like to head first?\n")
         while True:
-            print(f"So {self.player_name_input}, which way would you like to head first?\n")
-            while True:
-                player_input = input("Options: N/E/S/W").upper().strip()
-                match player_input:
-                    case Direction.NORTH.value:
-                        self.power_plant()
-                        break
-                    case Direction.EAST.value:
-                        self.forest()
-                        break
-                    case Direction.SOUTH.value:
-                        self.city()
-                        break
-                    case Direction.WEST.value:
-                        self.hospital()
-                        break
-                    case _:
-                        print("Have you forgotten how to spell too? Enter a valid direction...")
+            player_input = self.get_user_input("Options: N/E/S/W\n", [d.value for d in Direction])
+            match player_input:
+                case Direction.NORTH.value:
+                    self.power_plant()
+                    break
+                case Direction.EAST.value:
+                    self.forest()
+                    break
+                case Direction.SOUTH.value:
+                    self.city()
+                    break
+                case Direction.WEST.value:
+                    self.hospital()
+                    break
+                case _:
+                    print("Have you forgotten how to spell too? Enter a valid direction...")
 
     def start_zone_return(self):
         print("You return to where you started, not much has changed...")
         print(f"So {self.player_name_input}, which way would you like to head?\n")
 
         while True:
-            player_input = input("Options: N/E/S/W").upper().strip()
+            player_input =  self.get_user_input("Options: N/E/S/W\n", [d.value for d in Direction])
             match player_input:
                 case Direction.NORTH.value:
                     self.power_plant()
@@ -99,7 +113,7 @@ class ChernobylSurvivalGame:
     def return_to_start_zone(self):
         print(f"So {self.player_name_input}, which way would you like to head?\n")
         while True:
-            player_input = input("Options: S").upper().strip()
+            player_input = self.get_user_input("Options: S\n", [d.value for d in Direction])
             match player_input:
                 case Direction.SOUTH.value:
                     self.start_zone_return()
