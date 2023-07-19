@@ -19,11 +19,18 @@ class Decisions(Enum):
     NO = 'N'
     SANCTUM = 'SANCTUM'
 
-#class Player_info(Enum):
+
+
 
 class ChernobylSurvivalGame:
     def __init__(self):
-        pass
+        self.radiation_level = 0
+
+    def player_info(self):
+        
+        if self.radiation_level >= 3:
+            self.radiation_death()
+
 
     def get_user_input(self, prompt, valid_options):
         """
@@ -131,10 +138,10 @@ class ChernobylSurvivalGame:
                     self.cave()
                     break
                 case "2":
-                    print("field")
+                    self.field()
                     break
                 case "3":
-                    print("clue")
+                    self.fenced_area()
                     break
                 case "W":
                     self.start_zone_return()
@@ -143,24 +150,19 @@ class ChernobylSurvivalGame:
                     
 
 
-    def city(self):
-        print("Hello, you have reached the city.")
-
-    def hospital(self):
-        print("Hello, you have reached the hospital.")
-
+    
     def cave(self):
         print("As the player follows the mysterious sound deeper into the forest, they discover a hidden cave adorned with ancient symbols and an underground waterfall\n")
         cave_input = self.get_user_input("Do you venture behind the waterfall?",[Decisions.YES.value, Decisions.NO.value])
         match cave_input:
                 case Decisions.YES.value:
-                    print("You see a large symbol, I wonder what it could mean?" )
+                    
                     self.symbol()
-                    secret_input = input(""),[Decisions.SANCTUM.value]
+                    secret_input = input("You see a large symbol, I wonder what it could mean?").upper().strip()
                     match secret_input:
                         case Decisions.SANCTUM.value:
                             print("The symbol seems to glow faintly and you suddenly notice a passage that you swear was not there before, you crawl through to be met patrolling soldier on the other side\n ")
-                            #self.win_game()
+                            self.win_game()
                         case _:
                             print("That did not seem to do anything, if only you could work out the symbols meaning...\n")
                             self.cave()
@@ -182,6 +184,42 @@ class ChernobylSurvivalGame:
                 \\ //
                  """
         print(symbol)
+
+    def field(self):
+        print("As you explore further, you stumble upon a vast open field, amidst the swaying grass and gentle breeze, you an old and dirty radio...\n ")
+        print("It comes to life sporadically, revealing a faint but unmistakable voice— a survivor's log, Day 34. The survivor cryptically hints about a weapon crucial for survival, concealed within a safe in a nearby apartment building...")
+        self.forest()
+
+    def fenced_area(self):
+        radiation_zone = self.get_user_input("While collecting wood to make yourself a sheleter, you come across a fenced off area with a symbol stating 'DO NOT ENTER RADIATION RISK'Do you enter?(Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
+        match radiation_zone:
+            case Decisions.YES.value:
+                print("You start to feel a buzzing sound rattling inside of your skull, maybe the sign was right. You drop the wood you gathered and return to the forest +2 radiation level\n")
+                self.radiation_level += 2
+                self.player_info()
+                self.forest()
+            case Decisions.NO.value:
+                print("You return to the forest and make a comfortable shelter for the night. Radiation levels reset to 0\n")
+                self.radiaiton_level = 0
+                self.forest()
+
+                   
+        
+    
+    
+    def city(self):
+        print("Hello, you have reached the city.")
+
+    def hospital(self):
+        print("Hello, you have reached the hospital.")
+
+    def win_game(self):
+        print("Congratulations! You have successfully navigated through the treacherous Chernobyl Exclusion Zone, overcoming countless challenges and unearthing ancient mysteries. With determination and wit, you have survived the apocalypse and emerged as a true survivor. The world may have changed, but your resilience and bravery have stood the test of time. You are now hailed as a legend, the one who conquered the Zone and unlocked its deepest secrets. Your name will be remembered for generations to come, and your journey will forever be etched in history. Well done, champion of the Echoes of the Exclusion!")
+        self.game_introduction()
+
+    def radiation_death(self):
+        print("Your radiation exposure has exceeded the critical level, your body weakens, annd you succumb to the deadly effects, leaving the Exclusion Zone as your final resting place.")
+        self.game_introduction()
 # Instantiate the game object and run the game
 game = ChernobylSurvivalGame()
 game.game_introduction()
