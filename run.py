@@ -207,15 +207,16 @@ class ChernobylSurvivalGame:
     def apartment(self):
         print("As you explore the complex, you notice several rooms with open doors, revealing remnants of the past - scattered belongings, overturned furniture, and broken memories. Some rooms are completely dark, and you can only imagine what lies within. However, one particular room catches your attention. A faint light seeps out from beneath the door, hinting at something inside.\n")
         print("You open the door and find a safe, with a strange alphabetized lock, if only you knew the code...\n")
-        safe_code_input = input("Enter the code:")
+        safe_code_input = input("Enter the code: ")
         match safe_code_input:
-            case Decisions.CODE.value:
+            case "survivor":
                print("The safe unlocks with a dull thud, inside you discover a handgun, this is sure to help your survival.")
                self.weapon = True
                self.city()
+               
             case _:
-                print("that was not correct")
-                self.apartment()
+                print("That was not correct, maybe you can find it...\n")
+                self.city()
                 
                 
                 
