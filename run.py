@@ -128,7 +128,7 @@ class ChernobylSurvivalGame:
         print("You have walked beyond the city limits to a dense forest tainted by radiation. The trees stand twisted and sickly, their leaves discolored and wilted. The air is heavy with an acrid smell, and eerie glowing fungi dot the forest floor, casting an otherworldly glow.\n")
         print("Walking through the forest, you hear a mysterious sound coming from deep within, what do you do?")
         while True:
-            forest_decision =  self.get_user_input("Options: Follow the sound, explore the forest, build a shelter (1,2,3) or head back (W)\n",  [Decisions.ONE.value, Decisions.TWO.value, Decisions.THREE.value])
+            forest_decision =  self.get_user_input("Options: Follow the sound, explore the forest, build a shelter (1,2,3) or head back (W)\n",  [Decisions.ONE.value, Decisions.TWO.value, Decisions.THREE.value, Direction.WEST.value])
             match forest_decision:
                 case "1":
                     self.cave()
@@ -196,6 +196,16 @@ class ChernobylSurvivalGame:
 
     def city(self):
         print("You have reached the City Center. Once a bustling metropolis, the city now stands in ruins, its buildings crumbling and overgrown with vegetation. The eerie silence is broken only by the haunting howl of the wind, and the streets are littered with debris and remnants of human civilization...\n")
+        city_decision = self.get_user_input("Options: Head towards the apartment complex, go to the exclusion zone limit, head to the library (1,2,3) or head back (N)", [Decisions.ONE.value, Decisions.TWO.value, Decisions.THREE.value, Direction.NORTH.value])
+        match city_decision:
+            case Decisions.ONE.value:
+                print("apartment")
+            case Decisions.TWO.value:
+                print("mine field")
+            case Decisions.THREE.value:
+                print("library")
+            case Direction.NORTH.value:
+                self.start_zone_return()
 
 
     def hospital(self):
