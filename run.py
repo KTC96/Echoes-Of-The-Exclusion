@@ -28,12 +28,9 @@ class ChernobylSurvivalGame:
         self.weapon = False
 
     def player_info(self):
-
-        
         if self.radiation_level >= 3:
             self.radiation_death()
     
-
     def get_user_input(self, prompt, valid_options):
         """
         Utility function to validate and return user input
@@ -131,22 +128,18 @@ class ChernobylSurvivalGame:
     def forest(self):
         print("You have walked beyond the city limits to a dense forest tainted by radiation. The trees stand twisted and sickly, their leaves discolored and wilted. The air is heavy with an acrid smell, and eerie glowing fungi dot the forest floor, casting an otherworldly glow.\n")
         print("Walking through the forest, you hear a mysterious sound coming from deep within, what do you do?")
+         
+        forest_decision_map = {
+            Decisions.ONE.value: self.cave,
+            Decisions.TWO.value: self.field,
+            Decisions.THREE.value: self.fenced_area,
+            Direction.WEST.value: self.start_zone_return
+        }
+
         while True:
-            forest_decision =  self.get_user_input("Options: Follow the sound, explore the forest, build a shelter (1,2,3) or head back (W)\n",  [Decisions.ONE.value, Decisions.TWO.value, Decisions.THREE.value, Direction.WEST.value])
-            match forest_decision:
-                case "1":
-                    self.cave()
-                    break
-                case "2":
-                    self.field()
-                    break
-                case "3":
-                    self.fenced_area()
-                    break
-                case "W":
-                    self.start_zone_return()
-                case _:
-                    print("Have you forgotten how to spell too? Try again...")
+            forest_decision = self.get_user_input("Options: Follow the sound, explore the forest, build a shelter (1,2,3) or head back (W)\n", forest_decision_map.keys())
+            forest_decision_map[forest_decision]()
+            print("Have you forgotten how to spell too? Try again...")
                     
     def cave(self):
         print("As the player follows the mysterious sound deeper into the forest, they discover a hidden cave adorned with ancient symbols and an underground waterfall\n")
@@ -195,7 +188,7 @@ class ChernobylSurvivalGame:
                 self.forest()
             case Decisions.NO.value:
                 print("You return to the forest and make a comfortable shelter for the night. Radiation levels reset to 0\n")
-                self.radiaiton_level = 0
+                self.radiation_level = 0
                 self.forest()
 
     def city(self):
