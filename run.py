@@ -17,6 +17,7 @@ class Decisions(Enum):
 
     YES = 'Y'
     NO = 'N'
+    SANCTUM = 'SANCTUM'
 
 #class Player_info(Enum):
 
@@ -124,10 +125,10 @@ class ChernobylSurvivalGame:
         print("You have walked beyond the city limits to a dense forest tainted by radiation. The trees stand twisted and sickly, their leaves discolored and wilted. The air is heavy with an acrid smell, and eerie glowing fungi dot the forest floor, casting an otherworldly glow.\n")
         print("Walking through the forest, you hear a mysterious sound coming from deep within, what do you do?")
         while True:
-            forest_decision =  input("Options: Follow the sound, explore the forest, build a shelter (1,2,3)\n")
+            forest_decision =  input("Options: Follow the sound, explore the forest, build a shelter (1,2,3) or head back (W)\n").upper().strip()
             match forest_decision:
                 case "1":
-                    print("cave")
+                    self.cave()
                     break
                 case "2":
                     print("field")
@@ -135,6 +136,8 @@ class ChernobylSurvivalGame:
                 case "3":
                     print("clue")
                     break
+                case "W":
+                    self.start_zone_return()
                 case _:
                     print("Have you forgotten how to spell too? Try again...")
                     
@@ -146,6 +149,39 @@ class ChernobylSurvivalGame:
     def hospital(self):
         print("Hello, you have reached the hospital.")
 
+    def cave(self):
+        print("As the player follows the mysterious sound deeper into the forest, they discover a hidden cave adorned with ancient symbols and an underground waterfall\n")
+        cave_input = self.get_user_input("Do you venture behind the waterfall?",[Decisions.YES.value, Decisions.NO.value])
+        match cave_input:
+                case Decisions.YES.value:
+                    print("You see a large symbol, I wonder what it could mean?" )
+                    self.symbol()
+                    secret_input = input(""),[Decisions.SANCTUM.value]
+                    match secret_input:
+                        case Decisions.SANCTUM.value:
+                            print("The symbol seems to glow faintly and you suddenly notice a passage that you swear was not there before, you crawl through to be met patrolling soldier on the other side\n ")
+                            #self.win_game()
+                        case _:
+                            print("That did not seem to do anything, if only you could work out the symbols meaning...\n")
+                            self.cave()
+                            
+                case Decisions.NO.value:
+                            print()
+                            self.forest()
+               
+                    
+                
+    def symbol(self):
+        symbol = """
+                 /\\
+                /  \\
+               /  ^ \\
+              /   ^  \\
+              \\  ^  //
+               \\ ^ //
+                \\ //
+                 """
+        print(symbol)
 # Instantiate the game object and run the game
 game = ChernobylSurvivalGame()
 game.game_introduction()
