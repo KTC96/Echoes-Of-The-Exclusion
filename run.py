@@ -14,13 +14,12 @@ class Decisions(Enum):
     """
     Enum "constant" class for holding Y/N decisions in the game
     """
-
     YES = 'Y'
     NO = 'N'
     SANCTUM = 'SANCTUM'
-
-
-
+    ONE = "1"
+    TWO = "2"
+    THREE = "3"
 
 class ChernobylSurvivalGame:
     def __init__(self):
@@ -30,7 +29,6 @@ class ChernobylSurvivalGame:
         
         if self.radiation_level >= 3:
             self.radiation_death()
-
 
     def get_user_input(self, prompt, valid_options):
         """
@@ -82,7 +80,6 @@ class ChernobylSurvivalGame:
                     self.hospital()
                     break
                
-
     def start_zone_return(self):
         print("You return to where you started, not much has changed...")
         print(f"So {self.player_name_input}, which way would you like to head?\n")
@@ -118,7 +115,6 @@ class ChernobylSurvivalGame:
     def monster_fight(self):
         print("monster fight")
        
-
     def return_to_start_zone(self):
         print(f"So {self.player_name_input}, which way would you like to head?\n")
         while True:
@@ -132,7 +128,7 @@ class ChernobylSurvivalGame:
         print("You have walked beyond the city limits to a dense forest tainted by radiation. The trees stand twisted and sickly, their leaves discolored and wilted. The air is heavy with an acrid smell, and eerie glowing fungi dot the forest floor, casting an otherworldly glow.\n")
         print("Walking through the forest, you hear a mysterious sound coming from deep within, what do you do?")
         while True:
-            forest_decision =  input("Options: Follow the sound, explore the forest, build a shelter (1,2,3) or head back (W)\n").upper().strip()
+            forest_decision =  self.get_user_input("Options: Follow the sound, explore the forest, build a shelter (1,2,3) or head back (W)\n",  [Decisions.ONE.value, Decisions.TWO.value, Decisions.THREE.value])
             match forest_decision:
                 case "1":
                     self.cave()
@@ -148,9 +144,6 @@ class ChernobylSurvivalGame:
                 case _:
                     print("Have you forgotten how to spell too? Try again...")
                     
-
-
-    
     def cave(self):
         print("As the player follows the mysterious sound deeper into the forest, they discover a hidden cave adorned with ancient symbols and an underground waterfall\n")
         cave_input = self.get_user_input("Do you venture behind the waterfall?",[Decisions.YES.value, Decisions.NO.value])
@@ -170,9 +163,7 @@ class ChernobylSurvivalGame:
                 case Decisions.NO.value:
                             print()
                             self.forest()
-               
-                    
-                
+              
     def symbol(self):
         symbol = """
                  /\\
@@ -203,12 +194,9 @@ class ChernobylSurvivalGame:
                 self.radiaiton_level = 0
                 self.forest()
 
-                   
-        
-    
-    
     def city(self):
-        print("Hello, you have reached the city.")
+        print("You have reached the City Center. Once a bustling metropolis, the city now stands in ruins, its buildings crumbling and overgrown with vegetation. The eerie silence is broken only by the haunting howl of the wind, and the streets are littered with debris and remnants of human civilization...\n")
+
 
     def hospital(self):
         print("Hello, you have reached the hospital.")
