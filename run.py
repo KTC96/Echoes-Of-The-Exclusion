@@ -20,15 +20,19 @@ class Decisions(Enum):
     ONE = "1"
     TWO = "2"
     THREE = "3"
+    CODE = "survivor"
 
 class ChernobylSurvivalGame:
     def __init__(self):
         self.radiation_level = 0
+        self.weapon = False
 
     def player_info(self):
+
         
         if self.radiation_level >= 3:
             self.radiation_death()
+    
 
     def get_user_input(self, prompt, valid_options):
         """
@@ -199,13 +203,31 @@ class ChernobylSurvivalGame:
         city_decision = self.get_user_input("Options: Head towards the apartment complex, go to the exclusion zone limit, head to the library (1,2,3) or head back (N)", [Decisions.ONE.value, Decisions.TWO.value, Decisions.THREE.value, Direction.NORTH.value])
         match city_decision:
             case Decisions.ONE.value:
-                print("apartment")
+                self.apartment()
             case Decisions.TWO.value:
                 print("mine field")
             case Decisions.THREE.value:
                 print("library")
             case Direction.NORTH.value:
                 self.start_zone_return()
+    
+    def apartment(self):
+        print("As you explore the complex, you notice several rooms with open doors, revealing remnants of the past - scattered belongings, overturned furniture, and broken memories. Some rooms are completely dark, and you can only imagine what lies within. However, one particular room catches your attention. A faint light seeps out from beneath the door, hinting at something inside.\n")
+        print("You open the door and find a safe, with a strange alphabetized lock, if only you knew the code...\n")
+        safe_code_input = input("Enter the code:")
+        match safe_code_input:
+            case Decisions.CODE.value:
+               print("The safe unlocks with a dull thud, inside you discover a handgun, this is sure to help your survival.")
+               self.weapon = True
+               self.city()
+            case _:
+                print("that was not correct")
+                self.apartment()
+                
+                
+                
+               
+
 
 
     def hospital(self):
