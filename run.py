@@ -173,6 +173,32 @@ class ChernobylSurvivalGame:
                  """
         print(symbol)
 
+    def symbol2(self):
+        symbol2 = """
+                 /\\
+                /  \\
+               /  * \\
+              /   *  \\
+              \\  *  //
+               \\ * //
+                \\ //
+                 """
+        print(symbol2)
+
+    def symbol3(self):
+        symbol3 ="""
+                 /\\
+                /  \\
+               /  | \\
+              /   ^  \\
+              \\  |  //
+               \\ ^ //
+                \\ //
+                 """
+        print(symbol3)
+
+    
+
     def field(self):
         print("As you explore further, you stumble upon a vast open field, amidst the swaying grass and gentle breeze, you an old and dirty radio...\n ")
         print("It comes to life sporadically, revealing a faint but unmistakable voice— a survivor's log, Day 34. The survivor cryptically hints about a weapon crucial for survival, concealed within a safe in a nearby apartment building...")
@@ -198,9 +224,9 @@ class ChernobylSurvivalGame:
             case Decisions.ONE.value:
                 self.apartment()
             case Decisions.TWO.value:
-                print("mine field")
+                self.mine_field()
             case Decisions.THREE.value:
-                print("library")
+                self.library()
             case Direction.NORTH.value:
                 self.start_zone_return()
     
@@ -215,9 +241,38 @@ class ChernobylSurvivalGame:
                self.city()
                
             case _:
-                print("That was not correct, maybe you can find it...\n")
+                print("That was not correct\n")
                 self.city()
-                
+    
+    
+    def library(self):
+        print(" Upon entering the Library you are covered in radioactive dust, lets hope this is worth it (+1 radiation point)\n")
+        self.radiation_level += 1
+        self.player_info()
+        print("Inside, the dimly lit space is filled with dusty books and scattered notes, hinting at the knowledge it holds. As you explore, you come across a cryptic diary with the following symbols and text:\n")
+        self.symbol2()
+        print("HOPE\n")
+        self.symbol3()
+        print("REFUGE\n")
+        self.symbol()
+        print("SANCTUM\n")
+        return_to_city = self.get_user_input("Return to the city? (Y)",[Decisions.YES.value])
+        match return_to_city:
+            case Decisions.YES.value:
+                self.city()
+            
+
+        
+    def mine_field(self):
+        print("As you venture toward the outer limits of the city, you spot a menacing sight: a treacherous minefield stretching before you. Warning signs adorned with skull symbols and bold letters caution against entering. The air feels tense, and you can sense the lurking danger that lies ahead.")
+        enter_mine_field  = self.get_user_input("Enter the minefield? (Y/N)",[Decisions.YES.value, Decisions.NO.value])
+        match enter_mine_field:
+            case Decisions.YES.value:
+                self.death()
+            case Decisions.NO.value:
+                print("Surely the city must be safer...\n")
+                self.city()
+
                 
                 
                
@@ -234,6 +289,9 @@ class ChernobylSurvivalGame:
     def radiation_death(self):
         print("Your radiation exposure has exceeded the critical level, your body weakens, annd you succumb to the deadly effects, leaving the Exclusion Zone as your final resting place.")
         self.game_introduction()
+    
+    def death(self):
+        print("That was not a wise decision. Your journey in the Exclusion Zone has come to a tragic end. The unforgiving forces of the wasteland have claimed your life. May your memory echo through the haunting ruins of Chernobyl."\n)
 # Instantiate the game object and run the game
 game = ChernobylSurvivalGame()
 game.game_introduction()
