@@ -22,6 +22,10 @@ class Decisions(Enum):
     THREE = "3"
     CODE = "survivor"
 
+from enum import Enum
+
+# Your Direction and Decisions enums here...
+
 class ChernobylSurvivalGame:
     def __init__(self):
         self.radiation_level = 0
@@ -86,7 +90,7 @@ class ChernobylSurvivalGame:
         print(f"So {self.player_name_input}, which way would you like to head?\n")
 
         while True:
-            player_input =  self.get_user_input("Options: N/E/S/W\n", [d.value for d in Direction])
+            player_input = self.get_user_input("Options: N/E/S/W\n", [d.value for d in Direction])
             match player_input:
                 case Direction.NORTH.value:
                     self.power_plant()
@@ -139,7 +143,6 @@ class ChernobylSurvivalGame:
         while True:
             forest_decision = self.get_user_input("Options: Follow the sound, explore the forest, build a shelter (1,2,3) or head back (W)\n", forest_decision_map.keys())
             forest_decision_map[forest_decision]()
-            print("Have you forgotten how to spell too? Try again...")
                     
     def cave(self):
         print("As the player follows the mysterious sound deeper into the forest, they discover a hidden cave adorned with ancient symbols and an underground waterfall\n")
@@ -209,8 +212,7 @@ class ChernobylSurvivalGame:
         match radiation_zone:
             case Decisions.YES.value:
                 print("You start to feel a buzzing sound rattling inside of your skull, maybe the sign was right. You drop the wood you gathered and return to the forest +2 radiation level\n")
-                self.radiation_level += 2
-                self.player_info()
+                self.radiation_increase(2)
                 self.forest()
             case Decisions.NO.value:
                 print("You return to the forest and make a comfortable shelter for the night. Radiation levels reset to 0\n")
@@ -228,7 +230,7 @@ class ChernobylSurvivalGame:
             case Decisions.THREE.value:
                 self.library()
             case Direction.NORTH.value:
-                self.start_zone_return()
+                self.start_zone_return
     
     def apartment(self):
         print("As you explore the complex, you notice several rooms with open doors, revealing remnants of the past - scattered belongings, overturned furniture, and broken memories. Some rooms are completely dark, and you can only imagine what lies within. However, one particular room catches your attention. A faint light seeps out from beneath the door, hinting at something inside.\n")
@@ -247,8 +249,7 @@ class ChernobylSurvivalGame:
     
     def library(self):
         print(" Upon entering the Library you are covered in radioactive dust, lets hope this is worth it (+1 radiation point)\n")
-        self.radiation_level += 1
-        self.player_info()
+        self.radiation_increase(1)
         print("Inside, the dimly lit space is filled with dusty books and scattered notes, hinting at the knowledge it holds. As you explore, you come across a cryptic diary with the following symbols and text:\n")
         self.symbol2()
         print("HOPE\n")
@@ -256,13 +257,12 @@ class ChernobylSurvivalGame:
         print("REFUGE\n")
         self.symbol()
         print("SANCTUM\n")
+        print("I wonder what those strange symbols could mean?\n")
         return_to_city = self.get_user_input("Return to the city? (Y)",[Decisions.YES.value])
         match return_to_city:
             case Decisions.YES.value:
                 self.city()
             
-
-        
     def mine_field(self):
         print("As you venture toward the outer limits of the city, you spot a menacing sight: a treacherous minefield stretching before you. Warning signs adorned with skull symbols and bold letters caution against entering. The air feels tense, and you can sense the lurking danger that lies ahead.")
         enter_mine_field  = self.get_user_input("Enter the minefield? (Y/N)",[Decisions.YES.value, Decisions.NO.value])
@@ -273,25 +273,26 @@ class ChernobylSurvivalGame:
                 print("Surely the city must be safer...\n")
                 self.city()
 
-                
-                
-               
-
-
-
     def hospital(self):
-        print("Hello, you have reached the hospital.")
+        print("You arrive at the abandoned hospital, once a place of healing and hope. Now, it stands as a haunting reminder of the past. Broken windows and overgrown ivy greet you as you step inside. The scent of decay lingers in the air, and eerie silence fills the halls.\n")
 
     def win_game(self):
         print("Congratulations! You have successfully navigated through the treacherous Chernobyl Exclusion Zone, overcoming countless challenges and unearthing ancient mysteries. With determination and wit, you have survived the apocalypse and emerged as a true survivor. The world may have changed, but your resilience and bravery have stood the test of time. You are now hailed as a legend, the one who conquered the Zone and unlocked its deepest secrets. Your name will be remembered for generations to come, and your journey will forever be etched in history. Well done, champion of the Echoes of the Exclusion!")
         self.game_introduction()
 
     def radiation_death(self):
-        print("Your radiation exposure has exceeded the critical level, your body weakens, annd you succumb to the deadly effects, leaving the Exclusion Zone as your final resting place.")
+        
+        print("Your radiation exposure has exceeded the critical level, your body weakens, and you succumb to the deadly effects, leaving the Exclusion Zone as your final resting place.")
         self.game_introduction()
     
     def death(self):
-        print("That was not a wise decision. Your journey in the Exclusion Zone has come to a tragic end. The unforgiving forces of the wasteland have claimed your life. May your memory echo through the haunting ruins of Chernobyl."\n)
+        print("That was not a wise decision. Your journey in the Exclusion Zone has come to a tragic end. The unforgiving forces of the wasteland have claimed your life. May your memory echo through the haunting ruins of Chernobyl.\n")
+        self.game_introduction()
+
+    def radiation_increase(self, amount):
+        self.radiation_level += amount
+        self.player_info()
+
 # Instantiate the game object and run the game
 game = ChernobylSurvivalGame()
 game.game_introduction()
