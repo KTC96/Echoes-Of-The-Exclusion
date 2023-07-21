@@ -54,6 +54,26 @@ class ChernobylSurvivalGame:
             else:
                 print("Have you forgotten how to spell too? Try again...")
 
+    def return_to_location(self, location):
+        return_input = self.get_user_input(f"To return to {location}, enter R: ", [Decisions.RETURN.value])
+        if return_input == Decisions.RETURN.value:
+            location_func()
+
+
+    def return_to_location(self, location_name):
+        return_input = self.get_user_input(f"To return to {location_name}, enter R: ", [Decisions.RETURN.value])
+        match return_input:
+            case Decisions.RETURN.value:
+                match location_name:
+                    case "forest":
+                        self.forest()
+                    case "city":
+                        self.city()
+                    case "hospital":
+                        self.hospital()
+                    case "start_zone":
+                        self.start_zone_return()
+
     def game_introduction(self):
         """
         Asks the player if they want to play or not
@@ -299,12 +319,12 @@ class ChernobylSurvivalGame:
                 clear_screen()
                 print("You manage to sneak past the mutated dog by distracting by throwing a clipboard into another room. There dosn't seem to be much in the office other than a piece of paper with the words 'Narcotic aid' scribbled on them, could it be an anagram...\n")
                 #maybe implement damage feature
-                self.return_to_hospital()
+                self.return_to_location("hospital")
                 
             case Decisions.NO.value:
                 clear_screen()
                 print("That seems like the right choice...\n")
-                self.return_to_hospital()
+                self.return_to_location("hospital")
 
 
     def operating_room(self):
@@ -316,18 +336,13 @@ class ChernobylSurvivalGame:
                 clear_screen()
                 print("You search the corpse to discover a syringe labelled 'Antiradioactive particles (-2 radiation points)\n")
                 self.radiation_decrease(2)
-                self.return_to_hospital()
+                self.return_to_location("hospital")
 
             case Decisions.NO.value:
                 clear_screen()
                 print("Who knows what diseases that body could have had...\n")
-                self.return_to_hospital()
-                
-    def return_to_hospital(self):
-        return_to_hosptial = self.get_user_input("To return to hospital enter R",[Decisions.RETURN.value])
-        match return_to_hosptial:
-            case Decisions.RETURN.value:
-                self.hospital()
+                self.return_to_location("hospital")
+   
 
 
     def basement(self):
@@ -335,9 +350,15 @@ class ChernobylSurvivalGame:
         print("There does not seem to be much down here except from radioactive dust (+1 radiation point)")
         self.radiation_increase(1)
         return_to_hosptial3 = self.get_user_input("To return to hospital enter R",[Decisions.RETURN.value])
-        match return_to_hosptial3:
-                    case Decisions.YES.value:
-                        self.hospital()
+        match return_to_hosptial:
+            case Decisions.RETURN.value:
+                self.return_to_location("hospital")
+
+    def return_to_hospital(self):
+        return_to_hosptial = self.get_user_input("To return to hospital enter R",[Decisions.RETURN.value])
+        match return_to_hosptial:
+            case Decisions.RETURN.value:
+                self.return_to_location("hospital")
 
 
     def win_game(self):
