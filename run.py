@@ -283,12 +283,35 @@ class ChernobylSurvivalGame:
             Direction.EAST.value: self.start_zone_return}
 
         while True:
-            hospital_decision = self.get_user_input("Options: Search the Hospital offices, Explore the operating room, Decend into the basement (1/2/3) or head back (E) ",hospital_decision_map.keys())
+            hospital_decision = self.get_user_input("Options: Search the Hospital offices, Explore the operating room, Decend into the basement (1,2,3) or head back (E) ",hospital_decision_map.keys())
             hospital_decision_map[hospital_decision]()
 
     def hospital_office(self):
+        print("Upon entering the abandoned hospital offices, you are startled by a chilling sight: a mutated dog lurking in the shadows. Its disfigured appearance and haunting howls evoke terror ")
+        enter_office  = self.get_user_input("Search the office? (Y/N)",[Decisions.YES.value, Decisions.NO.value])
+        match enter_office:
+            case Decisions.YES.value:
+                print("You manage to sneak past the mutated dog by distracting by throwing a clipboard into another room. There dosn't seem to be much in the office other than a piece of paper with the words 'Narcotic aid' scribbled on them, could it be an anagram...\n")
+                #maybe implement damage feature
+                self.hospital()
+                
+            case Decisions.NO.value:
+                print("That seems like the right choice...\n")
+                self.hospital()
+
+
     def operating_room(self):
+        print("You cautiously enter the operating room, and the pungent stench of decay assaults your senses. Your eyes widen as you come face to face with a ghastly sight – a rotting corpse lies on the operating table, remnants of a medical procedure long abandoned.")
+        search_body = self.get_user_input("Search the corpse? (Y/N)",[Decisions.YES.value, Decisions.NO.value])
+        match search_body:
+            case Decisions.YES.value:
+                print("search")
+            case Decisions.NO.value:
+                print("Who knows what diseases that body could have had...\n")
+                self.hospital()
+
     def basement(self):
+        print("basment")
 
 
     
