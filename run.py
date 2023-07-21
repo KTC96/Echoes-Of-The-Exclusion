@@ -349,13 +349,9 @@ class ChernobylSurvivalGame:
         clear_screen()
         print("There does not seem to be much down here except from radioactive dust (+1 radiation point)")
         self.radiation_increase(1)
-        return_to_hosptial3 = self.get_user_input("To return to hospital enter R",[Decisions.RETURN.value])
-        match return_to_hosptial:
-            case Decisions.RETURN.value:
-                self.return_to_location("hospital")
+        self.return_to_location("hospital")
 
     def return_to_hospital(self):
-        return_to_hosptial = self.get_user_input("To return to hospital enter R",[Decisions.RETURN.value])
         match return_to_hosptial:
             case Decisions.RETURN.value:
                 self.return_to_location("hospital")
