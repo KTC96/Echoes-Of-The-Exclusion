@@ -259,7 +259,7 @@ class ChernobylSurvivalGame:
         print("You open the door and find a safe, with a strange alphabetized lock, if only you knew the code...\n")
         safe_code_input = input("Enter the code: ")
         match safe_code_input:
-            case "survivor":
+            case "radioacti":
                print("The safe unlocks with a dull thud, inside you discover a handgun, this is sure to help your survival.")
                self.weapon = True
                self.city()
