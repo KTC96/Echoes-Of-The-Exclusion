@@ -79,21 +79,18 @@ class ChernobylSurvivalGame:
         print("As you rise to your feet, a mixture of awe and unease fills your heart.\nThe haunting silence and eerie atmosphere of the exclusion zone envelop you.\nNature has reclaimed its territory, with overgrown vegetation and crumbling structures standing as testament to the past.\n")
         
         print(f"So {self.player_name_input}, which way would you like to head first?\n")
+     
+        start_direction_map = {
+                Direction.NORTH.value: self.power_plant,
+                Direction.EAST.value: self.forest,
+                Direction.SOUTH.value: self.city,
+                Direction.WEST.value: self.hospital
+        }
+
         while True:
-            player_input = self.get_user_input("Options: N/E/S/W\n", [d.value for d in Direction])
-            match player_input:
-                case Direction.NORTH.value:
-                    self.power_plant()
-                    break
-                case Direction.EAST.value:
-                    self.forest()
-                    break
-                case Direction.SOUTH.value:
-                    self.city()
-                    break
-                case Direction.WEST.value:
-                    self.hospital()
-                    break
+            start_direction = self.get_user_input("Options: N/E/S/W", start_direction_map.keys())
+            start_direction_map[start_direction]()
+
                
     def start_zone_return(self):
         clear_screen()
@@ -115,6 +112,7 @@ class ChernobylSurvivalGame:
                 case Direction.WEST.value:
                     self.hospital()
                     break
+
 
     def power_plant(self):
         clear_screen()
