@@ -28,6 +28,7 @@ class Decisions(Enum):
     TWO = "2"
     THREE = "3"
     #CODE = "survivor"
+    RETURN = 'R'
 
 from enum import Enum
 
@@ -249,9 +250,6 @@ class ChernobylSurvivalGame:
                 print("That was not correct\n")
                 self.city()
 
-    
-    
-    
     def library(self):
         
         print(" Upon entering the Library you are covered in radioactive dust, lets hope this is worth it (+1 radiation point)\n")
@@ -300,31 +298,48 @@ class ChernobylSurvivalGame:
         enter_office  = self.get_user_input("Search the office? (Y/N)",[Decisions.YES.value, Decisions.NO.value])
         match enter_office:
             case Decisions.YES.value:
+                clear_screen()
                 print("You manage to sneak past the mutated dog by distracting by throwing a clipboard into another room. There dosn't seem to be much in the office other than a piece of paper with the words 'Narcotic aid' scribbled on them, could it be an anagram...\n")
                 #maybe implement damage feature
-                self.hospital()
+                self.return_to_hospital()
                 
             case Decisions.NO.value:
+                clear_screen()
                 print("That seems like the right choice...\n")
-                self.hospital()
+                self.return_to_hospital()
 
 
     def operating_room(self):
-        
+        clear_screen()
         print("You cautiously enter the operating room, and the pungent stench of decay assaults your senses. Your eyes widen as you come face to face with a ghastly sight – a rotting corpse lies on the operating table, remnants of a medical procedure long abandoned.")
         search_body = self.get_user_input("Search the corpse? (Y/N)",[Decisions.YES.value, Decisions.NO.value])
         match search_body:
             case Decisions.YES.value:
-                print("You search the corpse to discover a synringe labelled 'Antiradioactive particles (-2 radiation points)\n")
+                clear_screen()
+                print("You search the corpse to discover a syringe labelled 'Antiradioactive particles (-2 radiation points)\n")
+                self.radiation_decrease(2)
+                self.return_to_hospital()
 
             case Decisions.NO.value:
+                clear_screen()
                 print("Who knows what diseases that body could have had...\n")
+                self.return_to_hospital()
+                
+    def return_to_hospital(self):
+        return_to_hosptial = self.get_user_input("To return to hospital enter R",[Decisions.RETURN.value])
+        match return_to_hosptial:
+            case Decisions.RETURN.value:
                 self.hospital()
 
+
     def basement(self):
+        clear_screen()
         print("There does not seem to be much down here except from radioactive dust (+1 radiation point)")
         self.radiation_increase(1)
-        self.hospital()
+        return_to_hosptial3 = self.get_user_input("To return to hospital enter R",[Decisions.RETURN.value])
+        match return_to_hosptial3:
+                    case Decisions.YES.value:
+                        self.hospital()
 
 
     def win_game(self):
@@ -348,7 +363,7 @@ class ChernobylSurvivalGame:
 
     def radiation_decrease(self,amount):
         self.radiation_level -= amount
-        self.player(info)
+        self.player_info()
 
 
 # Instantiate the game object and run the game
