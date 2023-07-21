@@ -221,8 +221,20 @@ class ChernobylSurvivalGame:
 
     def city(self):
         print("You have reached the City Center. Once a bustling metropolis, the city now stands in ruins, its buildings crumbling and overgrown with vegetation. The eerie silence is broken only by the haunting howl of the wind, and the streets are littered with debris and remnants of human civilization...\n")
-        city_decision = self.get_user_input("Options: Head towards the apartment complex, go to the exclusion zone limit, head to the library (1,2,3) or head back (N)", [Decisions.ONE.value, Decisions.TWO.value, Decisions.THREE.value, Direction.NORTH.value])
-        match city_decision:
+        #city_decision = self.get_user_input("
+        
+        city_decision_map= {
+            Decisions.ONE.value: self.apartment,
+            Decisions.TWO.value: self.mine_field,
+            Decisions.THREE.value: self.library,
+            Direction.WEST.value: self.start_zone_return}
+
+        while True:
+            city_decision = self.get_user_input("Options: Head towards the apartment complex, go to the exclusion zone limit, head to the library (1,2,3) or head back (N)",city_decision_map.keys())
+            city_decision_map[city_decision]()
+                    
+        
+        """match city_decision:
             case Decisions.ONE.value:
                 self.apartment()
             case Decisions.TWO.value:
@@ -230,7 +242,7 @@ class ChernobylSurvivalGame:
             case Decisions.THREE.value:
                 self.library()
             case Direction.NORTH.value:
-                self.start_zone_return
+                self.start_zone_return"""
     
     def apartment(self):
         print("As you explore the complex, you notice several rooms with open doors, revealing remnants of the past - scattered belongings, overturned furniture, and broken memories. Some rooms are completely dark, and you can only imagine what lies within. However, one particular room catches your attention. A faint light seeps out from beneath the door, hinting at something inside.\n")
@@ -275,13 +287,26 @@ class ChernobylSurvivalGame:
 
     def hospital(self):
         print("You arrive at the abandoned hospital, once a place of healing and hope. Now, it stands as a haunting reminder of the past. Broken windows and overgrown ivy greet you as you step inside. The scent of decay lingers in the air, and eerie silence fills the halls.\n")
+        hospital_decision = self.get_user_input("Options: Search the Hospital offices, Explore the operating room, Decend into the basement (1/2/3) or head back (E) ")
+        """
+        match city_decision:
+            case Decisions.ONE.value:
+                self.hospital_office()
+            case Decisions.TWO.value:
+                self.operating_room()
+            case Decisions.THREE.value:
+                self.basement()
+            case Direction.EAST.value:
+                self.start_zone_return
+        """
+
+    
 
     def win_game(self):
         print("Congratulations! You have successfully navigated through the treacherous Chernobyl Exclusion Zone, overcoming countless challenges and unearthing ancient mysteries. With determination and wit, you have survived the apocalypse and emerged as a true survivor. The world may have changed, but your resilience and bravery have stood the test of time. You are now hailed as a legend, the one who conquered the Zone and unlocked its deepest secrets. Your name will be remembered for generations to come, and your journey will forever be etched in history. Well done, champion of the Echoes of the Exclusion!")
         self.game_introduction()
 
     def radiation_death(self):
-        
         print("Your radiation exposure has exceeded the critical level, your body weakens, and you succumb to the deadly effects, leaving the Exclusion Zone as your final resting place.")
         self.game_introduction()
     
