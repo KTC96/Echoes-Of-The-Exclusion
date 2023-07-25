@@ -74,6 +74,10 @@ class ChernobylSurvivalGame:
                     case "start_zone":
                         self.start_zone_return()
 
+    def reset_game(self):
+        self.radiation_level = 0
+        self.weapon = False
+
     def game_introduction(self):
         """
         Asks the player if they want to play or not
@@ -82,6 +86,7 @@ class ChernobylSurvivalGame:
             decision = self.get_user_input("Would you like to play? (Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
             match decision:
                 case Decisions.YES.value:
+                    self.reset_game()
                     self.start_zone()
                     break
                 case Decisions.NO.value:
