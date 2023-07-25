@@ -74,6 +74,11 @@ class ChernobylSurvivalGame:
     def reset_game(self):
         self.radiation_level = 0
         self.weapon = False
+         self.visited_sublocations = {
+        "fenced_area": False,
+        "operating_room": False
+        }
+
 
     def game_introduction(self):
         """
