@@ -53,11 +53,13 @@ class ChernobylSurvivalGame:
                 return user_input
             else:
                 print("Have you forgotten how to spell too? Try again...")
+                """
 
     def return_to_location(self, location):
         return_input = self.get_user_input(f"To return to {location}, enter R: ", [Decisions.RETURN.value])
         if return_input == Decisions.RETURN.value:
             location_func()
+            """
 
 
     def return_to_location(self, location_name):
@@ -181,10 +183,13 @@ class ChernobylSurvivalGame:
         secret_input = input("???").upper().strip()
         match secret_input:
             case "SANCTUM":
+                clear_screen()
                 print("The symbol seems to glow faintly and you suddenly notice a passage that you swear was not there before, you crawl through to be met patrolling soldier on the other side\n ")
                 self.win_game()
             case _:
+                clear_screen()
                 print("That did not seem to do anything, if only you could work out the symbols meaning...\n")
+                self.return_to_location("forest")
                 
 
     def symbol(self):
@@ -228,21 +233,25 @@ class ChernobylSurvivalGame:
     def field(self):
         clear_screen()
         print("As you explore further, you stumble upon a vast open field, amidst the swaying grass and gentle breeze, you an old and dirty radio...\n ")
-        print("It comes to life sporadically, revealing a faint but unmistakable voice— a survivor's log, Day 34. The survivor cryptically hints about a weapon crucial for survival, concealed within a safe in a nearby apartment building...")
+        print("It comes to life sporadically, revealing a faint but unmistakable voice— a survivor's log, Day 34. The survivor cryptically hints about a weapon crucial for survival, concealed within a safe in a nearby apartment building...\n")
+        self.return_to_location("forest")
         
 
     def fenced_area(self):
-        
-        radiation_zone = self.get_user_input("While collecting wood to make yourself a sheleter, you come across a fenced off area with a symbol stating 'DO NOT ENTER RADIATION RISK'Do you enter?(Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
+        clear_screen()
+        radiation_zone = self.get_user_input("While collecting wood to make yourself a shelter, you come across a fenced off area with a symbol stating 'DO NOT ENTER RADIATION RISK'Do you enter?(Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
         match radiation_zone:
             case Decisions.YES.value:
+                clear_screen()
                 print("You start to feel a buzzing sound rattling inside of your skull, maybe the sign was right. You drop the wood you gathered and return to the forest +2 radiation level\n")
                 self.radiation_increase(2)
-                self.forest()
+                self.return_to_location("forest")
+
             case Decisions.NO.value:
+                clear_screen()
                 print("You return to the forest and make a comfortable shelter for the night. Radiation points decresed by 1\n")
                 self.radiation_decrease(1)
-                self.forest()
+                self.return_to_location("forest")
 
     def city(self):
         clear_screen()
@@ -259,22 +268,24 @@ class ChernobylSurvivalGame:
             city_decision_map[city_decision]()
     
     def apartment(self):
-        
+        clear_screen()
         print("As you explore the complex, you notice several rooms with open doors, revealing remnants of the past - scattered belongings, overturned furniture, and broken memories. Some rooms are completely dark, and you can only imagine what lies within. However, one particular room catches your attention. A faint light seeps out from beneath the door, hinting at something inside.\n")
         print("You open the door and find a safe, with a strange alphabetized lock, if only you knew the code...\n")
         safe_code_input = input("Enter the code: ")
         match safe_code_input:
-            case "radioacti":
-               print("The safe unlocks with a dull thud, inside you discover a handgun, this is sure to help your survival.")
-               self.weapon = True
-               self.city()
+            case "radioactive":
+                clear_screen()
+                print("The safe unlocks with a dull thud, inside you discover a handgun, this is sure to help your survival.")
+                self.weapon = True
+                self.return_to_location("city")
                
             case _:
+                clear_screen()
                 print("That was not correct\n")
-                self.city()
+                self.return_to_location("city")
 
     def library(self):
-        
+        clear_screen()
         print(" Upon entering the Library you are covered in radioactive dust, lets hope this is worth it (+1 radiation point)\n")
         self.radiation_increase(1)
         print("Inside, the dimly lit space is filled with dusty books and scattered notes, hinting at the knowledge it holds. As you explore, you come across a cryptic diary with the following symbols and text:\n")
@@ -285,21 +296,20 @@ class ChernobylSurvivalGame:
         self.symbol()
         print("SANCTUM\n")
         print("I wonder what those strange symbols could mean?\n")
-        return_to_city = self.get_user_input("Return to the city? (Y)",[Decisions.YES.value])
-        match return_to_city:
-            case Decisions.YES.value:
-                self.city()
+        self.return_to_location("city")
             
     def mine_field(self):
         
-        print("As you venture toward the outer limits of the city, you spot a menacing sight: a treacherous minefield stretching before you. Warning signs adorned with skull symbols and bold letters caution against entering. The air feels tense, and you can sense the lurking danger that lies ahead.")
+        print("As you venture toward the outer limits of the city, you spot a menacing sight: a treacherous minefield stretching before you. Warning signs adorned with skull symbols and bold letters caution against entering. The air feels tense, and you can sense the lurking danger that lies ahead.\n")
         enter_mine_field  = self.get_user_input("Enter the minefield? (Y/N)",[Decisions.YES.value, Decisions.NO.value])
         match enter_mine_field:
             case Decisions.YES.value:
+                clear_screen()
                 self.death()
             case Decisions.NO.value:
+                clear_screen()
                 print("Surely the city must be safer...\n")
-                self.city()
+                self.return_to_location("city")
 
     def hospital(self):
         clear_screen()
@@ -316,7 +326,7 @@ class ChernobylSurvivalGame:
             hospital_decision_map[hospital_decision]()
 
     def hospital_office(self):
-        
+        clear_screen()
         print("Upon entering the abandoned hospital offices, you are startled by a chilling sight: a mutated dog lurking in the shadows. Its disfigured appearance and haunting howls evoke terror ")
         enter_office  = self.get_user_input("Search the office? (Y/N)",[Decisions.YES.value, Decisions.NO.value])
         match enter_office:
