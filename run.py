@@ -150,9 +150,6 @@ class ChernobylSurvivalGame:
                 clear_screen()
                 print("The monster ripped you limb from limb if only you had a weapon..")
                 self.death()
-                
-
-    
 
     def forest(self):
         clear_screen()
@@ -186,7 +183,6 @@ class ChernobylSurvivalGame:
                 print("That did not seem to do anything, if only you could work out the symbols meaning...\n")
                 self.return_to_location("forest")
                 
-
     def symbol(self):
         symbol = """
                  /\\
@@ -223,15 +219,12 @@ class ChernobylSurvivalGame:
                  """
         print(symbol3)
 
-    
-
     def field(self):
         clear_screen()
         print("As you explore further, you stumble upon a vast open field, amidst the swaying grass and gentle breeze, you an old and dirty radio...\n ")
         print("It comes to life sporadically, revealing a faint but unmistakable voice— a survivor's log, Day 34. The survivor cryptically hints about a weapon crucial for survival, concealed within a safe in a nearby apartment building...\n")
         self.return_to_location("forest")
         
-
     def fenced_area(self):
         clear_screen()
         radiation_zone = self.get_user_input("While collecting wood to make yourself a shelter, you come across a fenced off area with a symbol stating 'DO NOT ENTER RADIATION RISK'Do you enter?(Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
@@ -336,7 +329,6 @@ class ChernobylSurvivalGame:
                 print("That seems like the right choice...\n")
                 self.return_to_location("hospital")
 
-
     def operating_room(self):
         clear_screen()
         print("You cautiously enter the operating room, and the pungent stench of decay assaults your senses. Your eyes widen as you come face to face with a ghastly sight – a rotting corpse lies on the operating table, remnants of a medical procedure long abandoned.")
@@ -353,8 +345,6 @@ class ChernobylSurvivalGame:
                 print("Who knows what diseases that body could have had...\n")
                 self.return_to_location("hospital")
    
-
-
     def basement(self):
         clear_screen()
         print("There does not seem to be much down here except from radioactive dust (+1 radiation point)")
@@ -365,7 +355,6 @@ class ChernobylSurvivalGame:
         match return_to_hosptial:
             case Decisions.RETURN.value:
                 self.return_to_location("hospital")
-
 
     def win_game(self):
         clear_screen()
@@ -389,7 +378,6 @@ class ChernobylSurvivalGame:
     def radiation_decrease(self,amount):
         self.radiation_level -= amount
         self.player_info()
-
 
 # Instantiate the game object and run the game
 game = ChernobylSurvivalGame()
