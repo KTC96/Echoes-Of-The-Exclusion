@@ -357,7 +357,6 @@ class ChernobylSurvivalGame:
                 self.return_to_location("hospital")
 
     def win_game(self):
-        clear_screen()
         print("Congratulations! You have successfully navigated through the treacherous Chernobyl Exclusion Zone, overcoming countless challenges and unearthing ancient mysteries. With determination and wit, you have survived the apocalypse and emerged as a true survivor. The world may have changed, but your resilience and bravery have stood the test of time. You are now hailed as a legend, the one who conquered the Zone and unlocked its deepest secrets. Your name will be remembered for generations to come, and your journey will forever be etched in history. Well done, champion of the Echoes of the Exclusion!")
         self.game_introduction()
 
@@ -367,8 +366,7 @@ class ChernobylSurvivalGame:
         self.game_introduction()
     
     def death(self):
-        clear_screen()
-        print("That was not a wise decision. Your journey in the Exclusion Zone has come to a tragic end. The unforgiving forces of the wasteland have claimed your life. May your memory echo through the haunting ruins of Chernobyl.\n")
+        print("Your journey in the Exclusion Zone has come to a tragic end. The unforgiving forces of the wasteland have claimed your life. May your memory echo through the haunting ruins of Chernobyl.\n")
         self.game_introduction()
 
     def radiation_increase(self, amount):
