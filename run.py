@@ -36,6 +36,10 @@ class ChernobylSurvivalGame:
     def __init__(self):
         self.radiation_level = 0
         self.weapon = False
+        self.visited_sublocations = {
+        "fenced_area": False,
+        "operating_room": False
+        }
 
     def player_info(self):
         if self.radiation_level >= 3:
@@ -53,6 +57,7 @@ class ChernobylSurvivalGame:
                 print("Have you forgotten how to spell too? Try again...\n")
 
     def return_to_location(self, location_name):
+
         return_input = self.get_user_input(f"To return to {location_name}, enter R: ", [Decisions.RETURN.value])
         match return_input:
             case Decisions.RETURN.value:
@@ -82,6 +87,7 @@ class ChernobylSurvivalGame:
                     self.start_zone()
                 case Decisions.NO.value:
                     print("Understood, you are not ready for the challenge...")
+                    break
                 
     def get_player_name(self):
         return input("Can you remember your name? (Enter name)\n").strip()
@@ -157,7 +163,7 @@ class ChernobylSurvivalGame:
         clear_screen()
         print("You have walked beyond the city limits to a dense forest tainted by radiation. The trees stand twisted and sickly, their leaves discolored and wilted. The air is heavy with an acrid smell, and eerie glowing fungi dot the forest floor, casting an otherworldly glow.\n")
         print("Walking through the forest, you hear a mysterious sound coming from deep within, what do you do?")
-         
+
         forest_decision_map = {
             Decisions.ONE.value: self.cave,
             Decisions.TWO.value: self.field,
@@ -229,19 +235,27 @@ class ChernobylSurvivalGame:
         
     def fenced_area(self):
         clear_screen()
-        radiation_zone = self.get_user_input("While collecting wood to make yourself a shelter, you come across a fenced off area with a symbol stating 'DO NOT ENTER RADIATION RISK'Do you enter?(Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
-        match radiation_zone:
-            case Decisions.YES.value:
-                clear_screen()
-                print("You start to feel a buzzing sound rattling inside of your skull, maybe the sign was right. You drop the wood you gathered and return to the forest +2 radiation level\n")
-                self.radiation_increase(2)
-                self.return_to_location("forest")
+        if not self.visited_sublocations["fenced_area"]:
+            self.visited_sublocations["fenced_area"] = True
+            
+            radiation_zone = self.get_user_input("While collecting wood to make yourself a shelter, you come across a fenced off area with a symbol stating 'DO NOT ENTER RADIATION RISK'Do you enter?(Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
+            match radiation_zone:
+                case Decisions.YES.value:
+                    clear_screen()
+                    print("You start to feel a buzzing sound rattling inside of your skull, maybe the sign was right. You drop the wood you gathered and return to the forest +2 radiation level\n")
+                    self.radiation_increase(2)
+                    self.return_to_location("forest")
 
-            case Decisions.NO.value:
-                clear_screen()
-                print("You return to the forest and make a comfortable shelter for the night. Radiation points decresed by 1\n")
-                self.radiation_decrease(1)
-                self.return_to_location("forest")
+                case Decisions.NO.value:
+                    clear_screen()
+                    print("You return to the forest and make a comfortable shelter for the night. Radiation points decresed by 1\n")
+                    self.radiation_decrease(1)
+                    self.return_to_location("forest")
+        else: 
+            print("That's enough building, continue your search elsewhere.../n")
+            self.return_to_location("forest")
+
+        
 
     def city(self):
         clear_screen()
@@ -333,20 +347,26 @@ class ChernobylSurvivalGame:
 
     def operating_room(self):
         clear_screen()
-        print("You cautiously enter the operating room, and the pungent stench of decay assaults your senses. Your eyes widen as you come face to face with a ghastly sight : a rotting corpse lies on the operating table, remnants of a medical procedure long abandoned.\n")
-        search_body = self.get_user_input("Search the corpse? (Y/N)\n",[Decisions.YES.value, Decisions.NO.value])
-        match search_body:
-            case Decisions.YES.value:
-                clear_screen()
-                print("You search the corpse to discover a syringe labelled 'Anti-radioactive particles (removes all current radiation points)\n")
-                self.radiation_level = 0
-                self.return_to_location("hospital")
+        if not self.visited_sublocations["operating_room"]:
+            
+            print("You cautiously enter the operating room, and the pungent stench of decay assaults your senses. Your eyes widen as you come face to face with a ghastly sight : a rotting corpse lies on the operating table, remnants of a medical procedure long abandoned.\n")
+            search_body = self.get_user_input("Search the corpse? (Y/N)\n",[Decisions.YES.value, Decisions.NO.value])
+            match search_body:
+                case Decisions.YES.value:
+                    clear_screen()
+                    print("You search the corpse to discover a syringe labelled 'Anti-radioactive particles (removes all current radiation points)\n")
+                    self.radiation_level = 0
+                    self.visited_sublocations["operating_room"] = True
+                    self.return_to_location("hospital")
 
-            case Decisions.NO.value:
-                clear_screen()
-                print("Who knows what diseases that body could have had...\n")
-                self.return_to_location("hospital")
-   
+                case Decisions.NO.value:
+                    clear_screen()
+                    print("Who knows what diseases that body could have had...\n")
+                    self.return_to_location("hospital")
+        else: 
+            print("You have already taken the medicine, continue your search elsewhere...\n")
+            self.return_to_location("hospital")
+    
     def basement(self):
         clear_screen()
         print("There does not seem to be much down here except from radioactive dust (+1 radiation point)")
