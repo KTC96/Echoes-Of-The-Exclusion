@@ -86,6 +86,7 @@ class ChernobylSurvivalGame:
         """
         while True:
             decision = self.get_user_input("Would you like to play? (Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
+            clear_screen()
             match decision:
                 case Decisions.YES.value:
                     self.reset_game()
@@ -102,7 +103,7 @@ class ChernobylSurvivalGame:
         self.player_name_input = self.get_player_name()
         clear_screen()
         print(f"Good luck surviving the apocalypse {self.player_name_input}\n")
-        print("As you rise to your feet, a mixture of awe and unease fills your heart.\nThe haunting silence and eerie atmosphere of the exclusion zone envelop you.\nNature has reclaimed its territory, with overgrown vegetation and crumbling structures standing as testament to the past.\n")
+        print("As you rise to your feet, a mixture of awe and unease fills your heart.\nThe haunting silence and eerie atmosphere of the exclusion zone envelop you.\nNature has reclaimed its territory, with overgrown vegetation and crumbling \n structures standing as testament to the past.\n")
         
         print(f"So {self.player_name_input}, which way would you like to head first?\n")
      
@@ -148,7 +149,7 @@ class ChernobylSurvivalGame:
                     self.monster_fight()
                 case Decisions.NO.value:
                     clear_screen()
-                    print("Who knows what that could have been, probably best to explore elesewhere first...\n")
+                    print("Who knows what that could have been, probably best to explore elsewhere first.\n")
                     self.return_to_location("start_zone")
 
     def monster_fight(self):
@@ -257,7 +258,7 @@ class ChernobylSurvivalGame:
                     self.radiation_decrease(1)
                     self.return_to_location("forest")
         else: 
-            print("That's enough building, continue your search elsewhere.../n")
+            print("That's enough building, continue your search elsewhere...\n")
             self.return_to_location("forest")
 
         
@@ -322,7 +323,7 @@ class ChernobylSurvivalGame:
 
     def hospital(self):
         clear_screen()
-        print("You arrive at the abandoned hospital, once a place of healing and hope. Now, it stands as a haunting reminder of the past. Broken windows and overgrown ivy greet you as you step inside. The scent of decay lingers in the air, and eerie silence fills the halls.\n")
+        print("You arrive at the abandoned hospital, once a place of healing and hope. Now, it stands as a haunting reminder of the past. Broken windows and overgrown ivy\n greet you as you step inside. The scent of decay lingers in the air, and eerie\n silence fills the halls.\n")
         
         hospital_decision_map= {
             Decisions.ONE.value: self.hospital_office,
@@ -331,17 +332,17 @@ class ChernobylSurvivalGame:
             Direction.EAST.value: self.start_zone_return}
 
         while True:
-            hospital_decision = self.get_user_input("Options: Search the Hospital offices, Explore the operating room, Decend into the basement (1,2,3) or head back (E)\n ",hospital_decision_map.keys())
+            hospital_decision = self.get_user_input("Options: Search the Hospital offices, Explore the operating room, Decend into\n the basement (1,2,3) or head back (E)\n ",hospital_decision_map.keys())
             hospital_decision_map[hospital_decision]()
 
     def hospital_office(self):
         clear_screen()
-        print("Upon entering the abandoned hospital offices, you are startled by a chilling sight: a mutated dog lurking in the shadows. Its disfigured appearance and haunting howls evoke terror ")
+        print("Upon entering the abandoned hospital offices, you are startled by a chilling\n sight: a mutated dog lurking in the shadows. Its disfigured appearance and haunting howls evoke terror\n ")
         enter_office  = self.get_user_input("Search the office? (Y/N)\n",[Decisions.YES.value, Decisions.NO.value])
         match enter_office:
             case Decisions.YES.value:
                 clear_screen()
-                print("You manage to sneak past the mutated dog by distracting by throwing a clipboard into another room. There dosn't seem to be much in the office other than a piece of paper with the words 'Narcotic aid' scribbled on them, could it be an anagram...\n")
+                print("You manage to distract the mutated dog by throwing a clipboard into another room. There dosn't seem to be much in the office, other than a piece of paper with the words 'Narcotic aid' scribbled on them, could it be an anagram...\n")
                 #maybe implement damage feature
                 self.return_to_location("hospital")
                 
@@ -354,12 +355,12 @@ class ChernobylSurvivalGame:
         clear_screen()
         if not self.visited_sublocations["operating_room"]:
             
-            print("You cautiously enter the operating room, and the pungent stench of decay assaults your senses. Your eyes widen as you come face to face with a ghastly sight : a rotting corpse lies on the operating table, remnants of a medical procedure long abandoned.\n")
+            print("You cautiously enter the operating room, and the pungent stench of decay\n assaults your senses. Your eyes widen as you come face to face with a ghastly sight : \na rotting corpse lies on the operating table, remnants of a medical procedure\n long abandoned.\n")
             search_body = self.get_user_input("Search the corpse? (Y/N)\n",[Decisions.YES.value, Decisions.NO.value])
             match search_body:
                 case Decisions.YES.value:
                     clear_screen()
-                    print("You search the corpse to discover a syringe labelled 'Anti-radioactive particles (removes all current radiation points)\n")
+                    print("You search the corpse to discover a syringe labelled 'Anti-radioactive particles' (removes all current radiation points)\n")
                     self.radiation_level = 0
                     self.visited_sublocations["operating_room"] = True
                     self.return_to_location("hospital")
