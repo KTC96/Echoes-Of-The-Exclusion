@@ -23,11 +23,9 @@ class Decisions(Enum):
     """
     YES = 'Y'
     NO = 'N'
-    #SANCTUM = 'SANCTUM'
     ONE = "1"
     TWO = "2"
     THREE = "3"
-    #CODE = "survivor"
     RETURN = 'R'
 
 from enum import Enum
@@ -53,14 +51,6 @@ class ChernobylSurvivalGame:
                 return user_input
             else:
                 print("Have you forgotten how to spell too? Try again...")
-                """
-
-    def return_to_location(self, location):
-        return_input = self.get_user_input(f"To return to {location}, enter R: ", [Decisions.RETURN.value])
-        if return_input == Decisions.RETURN.value:
-            location_func()
-            """
-
 
     def return_to_location(self, location_name):
         return_input = self.get_user_input(f"To return to {location_name}, enter R: ", [Decisions.RETURN.value])
@@ -90,10 +80,8 @@ class ChernobylSurvivalGame:
                 case Decisions.YES.value:
                     self.reset_game()
                     self.start_zone()
-                    break
                 case Decisions.NO.value:
                     print("Understood, you are not ready for the challenge...")
-                    break
                 
     def get_player_name(self):
         return input("Can you remember your name? (Enter name)\n").strip()
@@ -128,35 +116,42 @@ class ChernobylSurvivalGame:
             player_input = self.get_user_input("Options: N/E/S/W\n", [d.value for d in Direction])
             match player_input:
                 case Direction.NORTH.value:
-                    self.power_plant()
-                    break
+                    self.power_plant() 
                 case Direction.EAST.value:
-                    self.forest()
-                    break
+                    self.forest()  
                 case Direction.SOUTH.value:
                     self.city()
-                    break
                 case Direction.WEST.value:
                     self.hospital()
-                    break
-
-
+                    
     def power_plant(self):
         clear_screen()
         print("The heart of the disaster, the abandoned power plant looms in the distance, its towering smokestacks and crumbling reactors a haunting reminder of the catastrophic event. It emits an unsettling aura, and caution is advised when venturing too close.\n")
         while True:
-            power_plant_input = input("You see something scuttling in the shadows, do you investigate? (Y/N)\n").upper().strip()
+            power_plant_input =  self.get_user_input("You see something scuttling in the shadows, do you investigate? (Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
             match power_plant_input:
                 case Decisions.YES.value:
+                    clear_screen()
                     self.monster_fight()
-                    break
                 case Decisions.NO.value:
-                    self.start_zone_return
-                    break
+                    clear_screen()
+                    print("Who knows what that could have been, probably best to explore elesewhere first...\n")
+                    self.return_to_location("start_zone")
 
     def monster_fight(self):
         clear_screen()
-        print("monster fight")
+        print(" Turning a corner you are faced with a gigantic mutated monster, a nightmarish fusion of twisted limbs and glowing eyes.")
+        match self.weapon:
+            case True:
+                clear_screen()
+                print("You shoot the monster on a glowing lump on its underbelly, it explodes and the monster drops onto the ground\n")
+                self.win_game()
+            case False:
+                clear_screen()
+                print("The monster ripped you limb from limb if only you had a weapon..")
+                self.death()
+                
+
     
 
     def forest(self):
