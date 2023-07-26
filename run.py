@@ -1,5 +1,5 @@
 import os
-from enum import Enum
+from enum import StrEnum
 
 def clear_screen():
     if os.name == 'nt':
@@ -7,7 +7,7 @@ def clear_screen():
     else:
         os.system('clear')
 
-class Direction(Enum):
+class Direction(StrEnum):
     """
     Enum "constant" class for holidng values for directions in the game
     """
@@ -17,7 +17,7 @@ class Direction(Enum):
     SOUTH = 'S'
     WEST = 'W'
 
-class Decisions(Enum):
+class Decisions(StrEnum):
     """
     Enum "constant" class for holding Y/N decisions in the game
     """
@@ -28,17 +28,14 @@ class Decisions(Enum):
     THREE = "3"
     RETURN = 'R'
 
-from enum import Enum
-
-# Your Direction and Decisions enums here...
 
 class ChernobylSurvivalGame:
     def __init__(self):
         self.radiation_level = 0
         self.weapon = False
         self.visited_sublocations = {
-        "fenced_area": False,
-        "operating_room": False
+        "fenced_area": False,#indent
+        "operating_room": False#indent
         }
 
     def player_info(self):
@@ -51,14 +48,14 @@ class ChernobylSurvivalGame:
         """
         while True:
             user_input = input(prompt).upper().strip()
-            if user_input in valid_options:
+            if user_input in valid_options: #count inputs?
                 return user_input
             else:
                 print("Have you forgotten how to spell too? Try again...\n")
 
     def return_to_location(self, location_name):
 
-        return_input = self.get_user_input(f"To return to {location_name}, enter R: ", [Decisions.RETURN.value])
+        return_input = self.get_user_input(f"To return to {location_name}, enter R: ", [Decisions.RETURN])
         match return_input:
             case Decisions.RETURN.value:
                 match location_name:
@@ -69,7 +66,7 @@ class ChernobylSurvivalGame:
                     case "hospital":
                         self.hospital()
                     case "start_zone":
-                        self.start_zone_return()
+                        self.start_zone_return() #check this code, use if else
 
     def reset_game(self):
         self.radiation_level = 0
