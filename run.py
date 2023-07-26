@@ -376,11 +376,6 @@ class ChernobylSurvivalGame:
         self.radiation_increase(1)
         self.return_to_location("hospital")
 
-    """def return_to_hospital(self):
-        match return_to_hosptial:
-            case Decisions.RETURN.value:
-                self.return_to_location("hospital")"""
-
     def win_game(self):
         print("Congratulations! You have successfully navigated through the treacherous Chernobyl Exclusion Zone, overcoming countless challenges and unearthing ancient mysteries. With determination and wit, you have survived the apocalypse and emerged as a true survivor. The world may have changed, but your resilience and bravery have stood the test of time. You are now hailed as a legend, the one who conquered the Zone and unlocked its deepest secrets. Your name will be remembered for generations to come, and your journey will forever be etched in history. Well done, champion of the Echoes of the Exclusion!")
         self.game_introduction()
@@ -399,8 +394,11 @@ class ChernobylSurvivalGame:
         self.player_info()
 
     def radiation_decrease(self,amount):
-        self.radiation_level -= amount
-        self.player_info()
+        if self.radiation_level >=1
+            self.radiation_level -= amount
+            self.player_info()
+        else:
+            print("Your radiation level is already at 0")
 
 # Instantiate the game object and run the game
 game = ChernobylSurvivalGame()
