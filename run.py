@@ -84,14 +84,14 @@ class ChernobylSurvivalGame:
         while True:
             decision = self.get_user_input("Would you like to play? (Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
             clear_screen()
-            match decision:
-                case Decisions.YES.value:
-                    self.reset_game()
-                    self.start_zone()
-                case Decisions.NO.value:
-                    print("Understood, you are not ready for the challenge...")
-                    break
-                
+            if decision == Decisions.YES:
+                self.reset_game()
+                self.start_zone()
+            elif decision == Decisions.NO:
+                print("Understood, you are not ready for the challenge...")
+                break
+
+    
     def get_player_name(self):
         return input("Can you remember your name? (Enter name)\n").strip()
 
@@ -138,29 +138,26 @@ class ChernobylSurvivalGame:
         print("The heart of the disaster, the abandoned power plant looms in the distance, its towering smokestacks and crumbling reactors a haunting reminder of the catastrophic event. It emits an unsettling aura, and caution is advised when venturing too close.\n")
         print("This is the heart of the distaster, +2 radiation points\n")
         self.radiation_increase(2)
-        while True:
-            power_plant_input =  self.get_user_input("You see something scuttling in the shadows, do you investigate? (Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
-            match power_plant_input:
-                case Decisions.YES.value:
-                    clear_screen()
-                    self.monster_fight()
-                case Decisions.NO.value:
-                    clear_screen()
-                    print("Who knows what that could have been, probably best to explore elsewhere first.\n")
-                    self.return_to_location("start_zone")
+        power_plant_input =  self.get_user_input("You see something scuttling in the shadows, do you investigate? (Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
+        if power_plant_input == Decisions.YES:
+            clear_screen()
+            self.monster_fight()
+        elif power_plant_input == Decisions.NO:
+            clear_screen()
+            print("Who knows what that could have been, probably best to explore elsewhere first.\n")
+            self.return_to_location("start_zone")
 
     def monster_fight(self):
         clear_screen()
         print(" Turning a corner you are faced with a gigantic mutated monster, a nightmarish fusion of twisted limbs and glowing eyes.")
-        match self.weapon:
-            case True:
-                clear_screen()
-                print("You shoot the monster on a glowing lump on its underbelly, it explodes and the monster drops onto the ground\n")
-                self.win_game()
-            case False:
-                clear_screen()
-                print("The monster ripped you limb from limb if only you had a weapon..")
-                self.death()
+        if self.weapon == True:
+            clear_screen()
+            print("You shoot the monster on a glowing lump on its underbelly, it explodes and the monster drops onto the ground\n")
+            self.win_game()
+        elif self.weapon == False:
+            clear_screen()
+            print("The monster ripped you limb from limb if only you had a weapon..")
+            self.death()
 
     def forest(self):
         clear_screen()
@@ -184,16 +181,15 @@ class ChernobylSurvivalGame:
         print("You see a large symbol, I wonder what it could mean?")
         self.symbol()
         secret_input = input("???\n").upper().strip()
-        match secret_input:
-            case "SANCTUM":
-                clear_screen()
-                print("The symbol seems to glow faintly and you suddenly notice a passage that you swear was not there before, you crawl through to be met patrolling soldier on the other side\n ")
-                self.win_game()
-            case _:
-                clear_screen()
-                print("That did not seem to do anything, if only you could work out the symbols meaning...\n")
-                self.return_to_location("forest")
-                
+        if secret_input == "SANCTUM":
+            clear_screen()
+            print("The symbol seems to glow faintly and you suddenly notice a passage that you swear was not there before, you crawl through to be met patrolling soldier on the other side\n ")
+            self.win_game()
+        else:
+            clear_screen()
+            print("That did not seem to do anything, if only you could work out the symbols meaning...\n")
+            self.return_to_location("forest")
+                         
     def symbol(self):
         symbol = """
                  /\\
@@ -242,23 +238,19 @@ class ChernobylSurvivalGame:
             self.visited_sublocations["fenced_area"] = True
             
             radiation_zone = self.get_user_input("While collecting wood to make yourself a shelter, you come across a fenced off area with a symbol stating 'DO NOT ENTER RADIATION RISK'Do you enter?(Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
-            match radiation_zone:
-                case Decisions.YES.value:
-                    clear_screen()
-                    print("You start to feel a buzzing sound rattling inside of your skull, maybe the sign was right. You drop the wood you gathered and return to the forest +2 radiation level\n")
-                    self.radiation_increase(2)
-                    self.return_to_location("forest")
-
-                case Decisions.NO.value:
-                    clear_screen()
-                    print("You return to the forest and make a comfortable shelter for the night. Radiation points decresed by 1\n")
-                    self.radiation_decrease(1)
-                    self.return_to_location("forest")
+            if radiation_zone == Decisions.YES:
+                clear_screen()
+                print("You start to feel a buzzing sound rattling inside of your skull, maybe the sign was right. You drop the wood you gathered and return to the forest +2 radiation level\n")
+                self.radiation_increase(2)
+                self.return_to_location("forest")
+            elif radiation_zone == Decisions.NO:
+                clear_screen()
+                print("You return to the forest and make a comfortable shelter for the night. Radiation points decresed by 1\n")
+                self.radiation_decrease(1)
+                self.return_to_location("forest")
         else: 
             print("That's enough building, continue your search elsewhere...\n")
             self.return_to_location("forest")
-
-        
 
     def city(self):
         clear_screen()
@@ -278,19 +270,17 @@ class ChernobylSurvivalGame:
         clear_screen()
         print("As you explore the complex, you notice several rooms with open doors, revealing remnants of the past - scattered belongings, overturned furniture, and broken memories. Some rooms are completely dark, and you can only imagine what lies within. However, one particular room catches your attention. A faint light seeps out from beneath the door, hinting at something inside.\n")
         print("You open the door and find a safe, with a strange alphabetized lock, if only you knew the code...\n")
-        safe_code_input = input("Enter the code:\n ")
-        match safe_code_input:
-            case "radioactive":
-                clear_screen()
-                print("The safe unlocks with a dull thud, inside you discover a handgun, this is sure to help your survival.")
-                self.weapon = True
-                self.return_to_location("city")
-               
-            case _:
-                clear_screen()
-                print("That was not correct\n")
-                self.return_to_location("city")
-
+        safe_code_input = input("Enter the code:\n ").upper().strip()
+        if safe_code_input == "RADIOACTIVE":
+            clear_screen()
+            print("The safe unlocks with a dull thud, inside you discover a handgun, this is sure to help your survival.")
+            self.weapon = True
+            self.return_to_location("city")
+        else:
+            clear_screen()
+            print("That was not correct\n")
+            self.return_to_location("city")
+  
     def library(self):
         clear_screen()
         print(" Upon entering the Library you are covered in radioactive dust, lets hope this is worth it (+1 radiation point)\n")
@@ -309,14 +299,13 @@ class ChernobylSurvivalGame:
         
         print("As you venture toward the outer limits of the city, you spot a menacing sight: a treacherous minefield stretching before you. Warning signs adorned with skull symbols and bold letters caution against entering. The air feels tense, and you can sense the lurking danger that lies ahead.\n")
         enter_mine_field  = self.get_user_input("Enter the minefield? (Y/N)\n",[Decisions.YES.value, Decisions.NO.value])
-        match enter_mine_field:
-            case Decisions.YES.value:
-                clear_screen()
-                self.death()
-            case Decisions.NO.value:
-                clear_screen()
-                print("Surely the city must be safer...\n")
-                self.return_to_location("city")
+        if enter_mine_field == Decisions.YES:
+            clear_screen()
+            self.death()
+        elif enter_mine_field == Decisions.NO:
+            clear_screen()
+            print("Surely the city must be safer...\n")
+            self.return_to_location("city")
 
     def hospital(self):
         clear_screen()
@@ -336,17 +325,14 @@ class ChernobylSurvivalGame:
         clear_screen()
         print("Upon entering the abandoned hospital offices, you are startled by a chilling\n sight: a mutated dog lurking in the shadows. Its disfigured appearance and haunting howls evoke terror\n ")
         enter_office  = self.get_user_input("Search the office? (Y/N)\n",[Decisions.YES.value, Decisions.NO.value])
-        match enter_office:
-            case Decisions.YES.value:
-                clear_screen()
-                print("You manage to distract the mutated dog by throwing a clipboard into another room. There dosn't seem to be much in the office, other than a piece of paper with the words 'Narcotic aid' scribbled on them, could it be an anagram...\n")
-                #maybe implement damage feature
-                self.return_to_location("hospital")
-                
-            case Decisions.NO.value:
-                clear_screen()
-                print("That seems like the right choice...\n")
-                self.return_to_location("hospital")
+        if enter_office == Decisions.YES:
+            clear_screen()
+            print("You manage to distract the mutated dog by throwing a clipboard into another room. There dosn't seem to be much in the office, other than a piece of paper with the words 'Narcotic aid' scribbled on them, could it be an anagram...\n")
+            self.return_to_location("hospital")
+        elif Decisions.NO:
+            clear_screen()
+            print("That seems like the right choice...\n")
+            self.return_to_location("hospital")
 
     def operating_room(self):
         clear_screen()
@@ -354,18 +340,17 @@ class ChernobylSurvivalGame:
             
             print("You cautiously enter the operating room, and the pungent stench of decay\n assaults your senses. Your eyes widen as you come face to face with a ghastly sight : \na rotting corpse lies on the operating table, remnants of a medical procedure\n long abandoned.\n")
             search_body = self.get_user_input("Search the corpse? (Y/N)\n",[Decisions.YES.value, Decisions.NO.value])
-            match search_body:
-                case Decisions.YES.value:
-                    clear_screen()
-                    print("You search the corpse to discover a syringe labelled 'Anti-radioactive particles' (removes all current radiation points)\n")
-                    self.radiation_level = 0
-                    self.visited_sublocations["operating_room"] = True
-                    self.return_to_location("hospital")
-
-                case Decisions.NO.value:
-                    clear_screen()
-                    print("Who knows what diseases that body could have had...\n")
-                    self.return_to_location("hospital")
+            if search_body == Decisions.YES:
+                print("You search the corpse to discover a syringe labelled 'Anti-radioactive particles' (removes all current radiation points)\n")
+                self.radiation_level = 0
+                self.visited_sublocations["operating_room"] = True
+                self.return_to_location("hospital")
+            elif search_body == Decisions.NO:
+                clear_screen()
+                print("You search the corpse to discover a syringe labelled 'Anti-radioactive particles' (removes all current radiation points)\n")
+                self.radiation_level = 0
+                self.visited_sublocations["operating_room"] = True
+                self.return_to_location("hospital")
         else: 
             print("You have already taken the medicine, continue your search elsewhere...\n")
             self.return_to_location("hospital")
@@ -377,7 +362,7 @@ class ChernobylSurvivalGame:
         self.return_to_location("hospital")
 
     def win_game(self):
-        print("Congratulations! You have successfully navigated through the treacherous Chernobyl Exclusion Zone, overcoming countless challenges and unearthing ancient mysteries. With determination and wit, you have survived the apocalypse and emerged as a true survivor. The world may have changed, but your resilience and bravery have stood the test of time. You are now hailed as a legend, the one who conquered the Zone and unlocked its deepest secrets. Your name will be remembered for generations to come, and your journey will forever be etched in history. Well done, champion of the Echoes of the Exclusion!")
+        print("Congratulations! You have successfully navigated through the treacherous Chernobyl Exclusion Zone, overcoming countless challenges and unearthing ancient mysteries. With determination and wit, you have survived the apocalypse and emerged as a true survivor. The world may have changed, but your resilience and bravery have stood the test of time. You are now hailed as a legend, the one who conquered the Zone and unlocked its deepest secrets. Your name will be remembered for generations to come, and your journey will forever be etched in history. Well done, champion of the Echoes of the Exclusion!\n")
         self.game_introduction()
 
     def radiation_death(self):
@@ -394,7 +379,7 @@ class ChernobylSurvivalGame:
         self.player_info()
 
     def radiation_decrease(self,amount):
-        if self.radiation_level >=1
+        if self.radiation_level >=1:
             self.radiation_level -= amount
             self.player_info()
         else:
