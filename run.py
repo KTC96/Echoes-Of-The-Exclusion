@@ -202,8 +202,8 @@ class ChernobylSurvivalGame:
         sublocations, or they can head back to the starting zone
         """
         clear_screen()
-        print("You have walked beyond the city limits to a dense forest tainted by radiation.\n The trees stand twisted and sickly, their leaves discolored and wilted.\n The air is heavy with an acrid smell, and eerie glowing fungi dot the forest floor, \ncasting an otherworldly glow.\n")
-        print("Walking through the forest, you hear a mysterious sound coming from deep within,what do you do?")
+        print("You have walked beyond the city limits to a dense forest tainted by radiation.\nThe trees stand twisted and sickly, their leaves discolored and wilted.\n The air is heavy with an acrid smell, and eerie glowing fungi dot the forest floor,\ncasting an otherworldly glow.\n")
+        print("Walking through the forest, you hear a mysterious sound coming from deep within.\nwhat do you do?")
 
         forest_decision_map = {
             Decisions.ONE.value: self.cave,
@@ -213,7 +213,7 @@ class ChernobylSurvivalGame:
         }
 
         while True:
-            forest_decision = self.get_user_input("Options: Follow the sound, explore the forest, build a shelter (1,2,3)\n or head back (W)\n", forest_decision_map.keys())
+            forest_decision = self.get_user_input("Options: Follow the sound, explore the forest, build a shelter (1,2,3)\nor head back (W)\n", forest_decision_map.keys())
             forest_decision_map[forest_decision]()
                     
     def cave(self):
@@ -224,7 +224,7 @@ class ChernobylSurvivalGame:
         are prompted to return to the forest.
         """
         clear_screen()
-        print("As you follow the mysterious sound deeper into the forest, you discover a hidden \ncave adorned with ancient symbols and an underground waterfall.\n")
+        print("As you follow the mysterious sound deeper into the forest, you discover a hidden\ncave adorned with ancient symbols and an underground waterfall.\n")
         print("You see a large symbol, I wonder what it could mean?")
         self.symbols(1)
         secret_input = input("???\n").upper().strip()
