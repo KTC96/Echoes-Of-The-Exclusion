@@ -2,6 +2,10 @@ import os
 from enum import StrEnum
 
 def clear_screen():
+    """
+    Method checks the operating system and uses appropriate command to clear
+    the screen.
+    """
     if os.name == 'nt':
         os.system('cls')
     else:
@@ -9,7 +13,7 @@ def clear_screen():
 
 class Direction(StrEnum):
     """
-    Enum "constant" class for holidng values for directions in the game
+    Enum class to hold constant direction values
     """
     
     NORTH = 'N'
@@ -19,7 +23,7 @@ class Direction(StrEnum):
 
 class Decisions(StrEnum):
     """
-    Enum "constant" class for holding Y/N decisions in the game
+    Enum class to hold constant decisions in the game
     """
     YES = 'Y'
     NO = 'N'
@@ -31,20 +35,25 @@ class Decisions(StrEnum):
 
 class ChernobylSurvivalGame:
     def __init__(self):
+        """
+        Intitlilize instance variables
+        """
         self.radiation_level = 0
         self.weapon = False
         self.visited_sublocations = {
-        "fenced_area": False,#indent
-        "operating_room": False#indent
+            "fenced_area": False,
+            "operating_room": False
         }
-
+        
     def player_info(self):
         if self.radiation_level >= 3:
             self.radiation_death()
     
     def get_user_input(self, prompt, valid_options):
         """
-        Utility function to validate and return user input
+        Utility function to validate and return user input.
+        If it does not match the valid options it provides an
+        error message
         """
         while True:
             user_input = input(prompt).upper().strip()
@@ -54,7 +63,11 @@ class ChernobylSurvivalGame:
                 print("Have you forgotten how to spell too? Try again...\n")
 
     def return_to_location(self, location_name):
-
+        """
+        Allows player to return to a main location from a sublocation
+        while still wllowing the player to read the sublocation print
+        statement before returning there
+        """
         return_input = self.get_user_input(f"To return to {location_name}, enter R: ", [Decisions.RETURN])
         match return_input:
             case Decisions.RETURN.value:
@@ -66,9 +79,12 @@ class ChernobylSurvivalGame:
                     case "hospital":
                         self.hospital()
                     case "start_zone":
-                        self.start_zone_return() #check this code, use if else
+                        self.start_zone_return() 
 
     def reset_game(self):
+        """
+        Resets the instance variables so the game can be played again
+        """
         self.radiation_level = 0
         self.weapon = False
         self.visited_sublocations = {
@@ -79,7 +95,8 @@ class ChernobylSurvivalGame:
 
     def game_introduction(self):
         """
-        Asks the player if they want to play or not
+        Introduces the game and asks if the user wants to play. 
+
         """
         while True:
             decision = self.get_user_input("Would you like to play? (Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
@@ -91,18 +108,14 @@ class ChernobylSurvivalGame:
                 print("Understood, you are not ready for the challenge...")
                 break
 
-    
-    def get_player_name(self):
-        return input("Can you remember your name? (Enter name)\n").strip()
-
     def start_zone(self):
         print("As you slowly regain consciousness, the world around you comes into focus.\n The air feels heavy, carrying a sense of decay and abandonment.\nYou find yourself lying on the cold, damp ground, surrounded by the remnants of what was once a bustling town.\n")
-        self.player_name_input = self.get_player_name()
+        self.player_name = input("Can you remember your name? (Enter name)\n").strip()
         clear_screen()
-        print(f"Good luck surviving the apocalypse {self.player_name_input}\n")
+        print(f"Good luck surviving the apocalypse {self.player_name}\n")
         print("As you rise to your feet, a mixture of awe and unease fills your heart.\nThe haunting silence and eerie atmosphere of the exclusion zone envelop you.\nNature has reclaimed its territory, with overgrown vegetation and crumbling \n structures standing as testament to the past.\n")
         
-        print(f"So {self.player_name_input}, which way would you like to head first?\n")
+        print(f"So {self.player_name}, which way would you like to head first?\n")
      
         start_direction_map = {
                 Direction.NORTH.value: self.power_plant,
@@ -119,7 +132,7 @@ class ChernobylSurvivalGame:
     def start_zone_return(self):
         clear_screen()
         print("You return to where you started, not much has changed...")
-        print(f"So {self.player_name_input}, which way would you like to head?\n")
+        print(f"So {self.player_name}, which way would you like to head?\n")
 
         while True:
             player_input = self.get_user_input("Options: N/E/S/W\n", [d.value for d in Direction])
@@ -312,7 +325,7 @@ class ChernobylSurvivalGame:
             Decisions.ONE: self.hospital_office,
             Decisions.TWO: self.operating_room,
             Decisions.THREE: self.basement,
-            Direction.EAST: self.start_zone_return}
+            Direction.EAST.value: self.start_zone_return}
 
         while True:
             hospital_decision = self.get_user_input("Options: Search the Hospital offices, Explore the operating room, Decend into\n the basement (1,2,3) or head back (E)\n ",hospital_decision_map.keys())
