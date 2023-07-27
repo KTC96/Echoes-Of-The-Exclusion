@@ -179,7 +179,7 @@ class ChernobylSurvivalGame:
         clear_screen()
         print("As you follow the mysterious sound deeper into the forest, you discover a hidden cave adorned with ancient symbols and an underground waterfall\n")
         print("You see a large symbol, I wonder what it could mean?")
-        self.symbol()
+        self.symbols(1)
         secret_input = input("???\n").upper().strip()
         if secret_input == "SANCTUM":
             clear_screen()
@@ -189,42 +189,39 @@ class ChernobylSurvivalGame:
             clear_screen()
             print("That did not seem to do anything, if only you could work out the symbols meaning...\n")
             self.return_to_location("forest")
-                         
-    def symbol(self):
-        symbol = """
-                 /\\
-                /  \\
-               /  ^ \\
-              /   ^  \\
-              \\  ^  //
-               \\ ^ //
-                \\ //
-                 """
-        print(symbol)
 
-    def symbol2(self):
-        symbol2 = """
-                 /\\
-                /  \\
-               /  * \\
-              /   *  \\
-              \\  *  //
-               \\ * //
-                \\ //
-                 """
-        print(symbol2)
+    def symbols(self,symbol_number):
+        all_symbols = [
+            """
+                     /\\
+                    /  \\
+                   /  ^ \\
+                  /   ^  \\
+                  \\  ^  //
+                   \\ ^ //
+                    \\ //
+                     """,
+            """
+                     /\\
+                    /  \\
+                   /  * \\
+                  /   *  \\
+                  \\  *  //
+                   \\ * //
+                    \\ //
+                     """,
+            """
+                     /\\
+                    /  \\
+                   /  | \\
+                  /   ^  \\
+                  \\  |  //
+                   \\ ^ //
+                    \\ //
+                     """
+        ]
 
-    def symbol3(self):
-        symbol3 ="""
-                 /\\
-                /  \\
-               /  | \\
-              /   ^  \\
-              \\  |  //
-               \\ ^ //
-                \\ //
-                 """
-        print(symbol3)
+        print(all_symbols[symbol_number - 1])
 
     def field(self):
         clear_screen()
@@ -286,11 +283,11 @@ class ChernobylSurvivalGame:
         print(" Upon entering the Library you are covered in radioactive dust, lets hope this is worth it (+1 radiation point)\n")
         self.radiation_increase(1)
         print("Inside, the dimly lit space is filled with dusty books and scattered notes, hinting at the knowledge it holds. As you explore, you come across a cryptic diary with the following symbols and text:\n")
-        self.symbol2()
+        self.symbols(2)
         print("HOPE\n")
-        self.symbol3()
+        self.symbols(3)
         print("REFUGE\n")
-        self.symbol()
+        self.symbols(1)
         print("SANCTUM\n")
         print("I wonder what those strange symbols could mean?\n")
         self.return_to_location("city")
