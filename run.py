@@ -295,7 +295,7 @@ class ChernobylSurvivalGame:
     def mine_field(self):
         
         print("As you venture toward the outer limits of the city, you spot a menacing sight: a treacherous minefield stretching before you. Warning signs adorned with skull symbols and bold letters caution against entering. The air feels tense, and you can sense the lurking danger that lies ahead.\n")
-        enter_mine_field  = self.get_user_input("Enter the minefield? (Y/N)\n",[Decisions.YES.value, Decisions.NO.value])
+        enter_mine_field  = self.get_user_input("Enter the minefield? (Y/N)\n",[Decisions.YES, Decisions.NO])
         if enter_mine_field == Decisions.YES:
             clear_screen()
             self.death()
@@ -309,10 +309,10 @@ class ChernobylSurvivalGame:
         print("You arrive at the abandoned hospital, once a place of healing and hope. Now, it stands as a haunting reminder of the past. Broken windows and overgrown ivy\n greet you as you step inside. The scent of decay lingers in the air, and eerie\n silence fills the halls.\n")
         
         hospital_decision_map= {
-            Decisions.ONE.value: self.hospital_office,
-            Decisions.TWO.value: self.operating_room,
-            Decisions.THREE.value: self.basement,
-            Direction.EAST.value: self.start_zone_return}
+            Decisions.ONE: self.hospital_office,
+            Decisions.TWO: self.operating_room,
+            Decisions.THREE: self.basement,
+            Direction.EAST: self.start_zone_return}
 
         while True:
             hospital_decision = self.get_user_input("Options: Search the Hospital offices, Explore the operating room, Decend into\n the basement (1,2,3) or head back (E)\n ",hospital_decision_map.keys())
