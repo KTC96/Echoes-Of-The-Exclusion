@@ -108,7 +108,15 @@ class ChernobylSurvivalGame:
         message is displayed.
         """
         while True:
-            
+            print("""
+            ////////////////////////
+            ECHOES OF THE EXCLUSION
+            ////////////////////////
+
+                Can you survive
+                the wasteland?
+            """)		              
+                                                                                     
             decision = self.get_user_input("Would you like to play? (Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
             clear_screen()
             if decision == Decisions.YES:
@@ -119,7 +127,6 @@ class ChernobylSurvivalGame:
                 self.player_name = "" 
                 break
 
-    
     def play_again_prompt(self):
         """
         Prompts the player to decide if they want to play again.
