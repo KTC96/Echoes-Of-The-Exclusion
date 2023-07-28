@@ -381,7 +381,7 @@ class ChernobylSurvivalGame:
         print("You have reached the City Center. Once a bustling metropolis, the city")
         print("now stands in ruins, its buildings crumbling and overgrown with vegetation.")
         print("The eerie silence is broken only by the haunting howl of the wind, and the")
-        pint("streets are littered with debris and remnants of human civilization...\n")
+        print("streets are littered with debris and remnants of human civilization...\n")
 
         city_decision_map= {
             Decisions.ONE.value: self.apartment,
