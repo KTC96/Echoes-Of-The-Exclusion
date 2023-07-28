@@ -1,4 +1,5 @@
 import os
+import sys
 from enum import StrEnum
 
 
@@ -97,19 +98,36 @@ class ChernobylSurvivalGame:
     def game_introduction(self):
         """
         Introduces the player to the game and asks if they want to play.
-        If the player chooses to play(by entering 'Y'), the game is initiated
-        by calling the 'reset_game()' and 'start_zone()'methods. If the player
+        If the player chooses to play (by entering 'Y'), the game is initiated
+        by calling the 'reset_game()' and 'start_zone()' methods. If the player
         declines (by entering 'N'), the game does not start, and a farewell
         message is displayed.
-
         """
-        decision = self.get_user_input("Would you like to play? (Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
-        clear_screen()
-        if decision == Decisions.YES:
-            self.reset_game()
-            self.start_zone()
-        elif decision == Decisions.NO:
-            print("Understood, you are not ready for the challenge...")
+        while True:
+            decision = self.get_user_input("Would you like to play? (Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
+            clear_screen()
+            if decision == Decisions.YES:
+                self.reset_game()
+                self.start_zone()
+            elif decision == Decisions.NO:
+                print("Understood, you are not ready for the challenge...")
+                break
+
+    
+    def play_again_prompt(self):
+        """
+        Prompts the player to decide if they want to play again.
+        """
+        while True:
+            play_again = self.get_user_input("Do you want to play again? (Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
+            clear_screen()
+            if play_again == Decisions.YES:
+                self.reset_game()
+                self.start_zone()
+                break
+            elif play_again == Decisions.NO:
+                print("Thanks for playing! See you next time.")
+                sys.exit()
     
     def start_zone(self):
         """
@@ -117,7 +135,7 @@ class ChernobylSurvivalGame:
         enter their name and is given the choice to determine the direction
         they want to head first.
         """
-    
+        clear_screen()
         print("As you slowly regain consciousness, the world around you comes")
         print("into focus. The air feels heavy, carrying a sense of decay and")
         print("abandonment.You find yourself lying on the cold, damp ground," )
@@ -178,7 +196,7 @@ class ChernobylSurvivalGame:
         print("The heart of the disaster, the abandoned power plant looms in the")
         print("distance, its towering smokestacks and crumbling reactors a")
         print("haunting reminder of the catastrophic event. It emits an ")
-        print("unsettling aura, and caution is advised when venturing too close.")
+        print("unsettling aura, and caution is advised when venturing too close.\n")
         print("This is the heart of the distaster, +2 radiation points\n")
         self.radiation_increase(2)
         power_plant_input =  self.get_user_input("You see something scuttling in the shadows, do you investigate? (Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
@@ -205,7 +223,7 @@ class ChernobylSurvivalGame:
             self.win_game()
         elif self.weapon == False:
             clear_screen()
-            print("The monster ripped you limb from limb if only you had a weapon..")
+            print("The monster ripped you limb from limb if only you had a weapon..\n")
             self.death()
 
     def forest(self):
@@ -511,19 +529,19 @@ class ChernobylSurvivalGame:
         print("secrets. Your name will be remembered for generations to come,")
         print("and your journey will forever be etched in history. Well done,")
         print("champion of the Echoes of the Exclusion!\n")
-        self.game_introduction()
+        self.play_again_prompt()
 
     def radiation_death(self):
         print("Your radiation exposure has exceeded the critical level, your")
         print("body weakens, and you succumb to the deadly effects, leaving the")
         print("Exclusion Zone as your final resting place.\n")
-        self.game_introduction()
+        self.play_again_prompt()
     
     def death(self):
         print("Your journey in the Exclusion Zone has come to a tragic end. The")
         print("unforgiving forces of the wasteland have claimed your life. May")
         print("your memory echo through the haunting ruins of Chernobyl.\n")
-        self.game_introduction()
+        self.play_again_prompt()
 
     def radiation_increase(self, amount):
         self.radiation_level += amount
@@ -537,5 +555,6 @@ class ChernobylSurvivalGame:
             print("Your radiation level is already at 0\n")
 
 # Instantiate the game object and run the game
-game = ChernobylSurvivalGame()
-game.game_introduction()
+if __name__ == "__main__":
+    game = ChernobylSurvivalGame()
+    game.game_introduction()
