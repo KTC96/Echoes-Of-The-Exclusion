@@ -47,6 +47,8 @@ class ChernobylSurvivalGame:
             "fenced_area": False,
             "operating_room": False
         }
+
+        self.player_name = ""
     
     def player_info(self):
         if self.radiation_level >= 3:
@@ -94,6 +96,8 @@ class ChernobylSurvivalGame:
             "fenced_area": False,
             "operating_room": False
         }
+        
+            
 
     def game_introduction(self):
         """
@@ -104,6 +108,7 @@ class ChernobylSurvivalGame:
         message is displayed.
         """
         while True:
+            
             decision = self.get_user_input("Would you like to play? (Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
             clear_screen()
             if decision == Decisions.YES:
@@ -111,6 +116,7 @@ class ChernobylSurvivalGame:
                 self.start_zone()
             elif decision == Decisions.NO:
                 print("Understood, you are not ready for the challenge...")
+                self.player_name = "" 
                 break
 
     
@@ -127,6 +133,7 @@ class ChernobylSurvivalGame:
                 break
             elif play_again == Decisions.NO:
                 print("Thanks for playing! See you next time.")
+                self.player_name = "" 
                 sys.exit()
     
     def start_zone(self):
@@ -140,7 +147,8 @@ class ChernobylSurvivalGame:
         print("into focus. The air feels heavy, carrying a sense of decay and")
         print("abandonment.You find yourself lying on the cold, damp ground," )
         print("surrounded by the remnants of what was once a bustling town.\n")
-        self.player_name = input("Can you remember your name? (Enter name)\n").strip()
+        if not self.player_name:
+            self.player_name = input("Can you remember your name? (Enter name)\n").strip().capitalize()
         clear_screen()
         print(f"Good luck surviving the apocalypse {self.player_name}\n")
         print("As you rise to your feet, a mixture of awe and unease fills your") 
