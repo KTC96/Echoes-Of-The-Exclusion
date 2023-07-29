@@ -5,6 +5,8 @@ import sys
 from enum import StrEnum
 
 # Credit from https://www.geeksforgeeks.org/clear-screen-python/
+
+
 def clear_screen():
     """
     Method checks the operating system and uses appropriate command to clear
@@ -16,6 +18,8 @@ def clear_screen():
         os.system('clear')
 
 # Credit from https://www.geeksforgeeks.org/enum-in-python/
+
+
 class Direction(StrEnum):
     """
     Enum class to hold constant direction values
@@ -461,7 +465,7 @@ class ChernobylSurvivalGame:
         print("a treacherous minefield stretching before you. Warning signs adorned with skull")
         print("symbols and bold letters caution against entering. The air feels tense, and you")
         print("can sense the lurking danger that lies ahead.\n")
-        enter_mine_field = self.get_user_input("Enter the minefield? (Y/N)\n"[Decisions.YES, Decisions.NO])
+        enter_mine_field = self.get_user_input("Enter the minefield? (Y/N)\n", [Decisions.YES, Decisions.NO])
         if enter_mine_field == Decisions.YES:
             clear_screen()
             print("That was not a wise decision...")

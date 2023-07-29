@@ -15,7 +15,8 @@ Echoes Of The Exclusion is a text based survival adventure game written using py
 3. [Data Model](#data-model)
 4. [Testing](#testing)
    * [Bugs](#bugs)
-        * [Solved](#solved-bugs)
+        * [Solved Bugs](#solved-bugs)
+        * [Remaining Bugs](#remaining-bugs)
    * [Validator Testing](#validator-testing)
 5. [Deployment](#deployment)
 6. [Credits](#credits)
@@ -79,6 +80,10 @@ Explanation: When the player died and was asked to play, if they chose 'N' (No) 
 Issue: get_user_input was case insensitve
 
 Explanation: The get_user_input method was modified to convert the valid options to uppercase to ensure case-insensitive comparison with the user's input. This prevents issues where the user might enter lowercase characters for valid options.
+
+#### Remaining Bugs
+
+There are no remaining bugs
 
 
 ### Validator Testing
