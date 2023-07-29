@@ -113,9 +113,9 @@ class ChernobylSurvivalGame:
         """
         while True:
             print("""
-                                        ////////////////////////
-                                        ECHOES OF THE EXCLUSION
-                                        ////////////////////////
+                            ////////////////////////
+                            ECHOES OF THE EXCLUSION
+                            ////////////////////////
 
                 Can you survive
                 the wasteland?
