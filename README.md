@@ -26,7 +26,7 @@ Echoes Of The Exclusion is a text based survival adventure game written using py
 Echoes Of The Exclusion is an interactive text based adventure game. You can read more about the general theme on [Wikipedia](https://en.wikipedia.org/wiki/Text-based_game)
 This game is based on surviving the Exclusion zone, based on Chernobyl. The player enters their name and they can then choose which direction to travel by inputting N, E, S or W (North, East, South, West). This takes the player to a new area which they can explore. They are given either multiple options which can be selected by inputting 1, 2 or 3 or head back to the previous location by entering the character displayed. There are also Yes/ No options which are decided by entering either Y or N. 
 
-There are different ways to win the game and different ways to lose, depending on the players memory, luck and skills.  
+There are different ways to win and lose, depending on the players memory, luck and skills.  
 
 ## Features
 
@@ -80,7 +80,7 @@ Issue: get_user_input was case insensitve
 Explanation: The get_user_input method was modified to convert the valid options to uppercase to ensure case-insensitive comparison with the user's input. This prevents issues where the user might enter lowercase characters for valid options.
 
 
-### Validator  Testing
+### Validator Testing
 
 ## Deployment
 
