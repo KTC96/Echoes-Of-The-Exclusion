@@ -117,11 +117,11 @@ class ChernobylSurvivalGame:
                             ECHOES OF THE EXCLUSION
                             ////////////////////////
 
-                Can you survive
-                the wasteland?
+                                Can you survive
+                                the wasteland?
 
-            Objective: Esacpe the Exclusion zone.
-            Your decisions decide your fate.
+                       Objective: Esacpe the Exclusion zone.
+                          Your decisions decide your fate.
 
             Tip: Your maximum radiation points are 3
             """)
@@ -159,10 +159,10 @@ class ChernobylSurvivalGame:
         they want to head first.
         """
         clear_screen()
-        print("As you slowly regain consciousness, the world around you comes")
-        print("into focus. The air feels heavy, carrying a sense of decay and")
-        print("abandonment.You find yourself lying on the cold, damp ground,")
-        print("surrounded by the remnants of what was once a bustling town.\n")
+        print("As you slowly regain consciousness, the world around you comes into focus. The")
+        print("air feels heavy, carrying a sense of decay and abandonment. You find")
+        print("yourself lying on the cold, damp ground, surrounded by the remnants of")
+        print("what was once a bustling town.\n")
         if not self.player_name:
             self.player_name = input("Can you remember your name? (Enter name)\n").strip().capitalize()
         clear_screen()
