@@ -38,6 +38,7 @@ There are different ways to win and lose, depending on the players memory, luck 
 * Count how many inputs (decisions and directions) it took for the player to successfully complete the game and display high scores.
 * Implement a health feature, more weapons and a combat system. 
 * Have more items that can be stored in the players inventory which can be checked by entering a specific word.
+* Properly integrate classes for different instances of the game
 
 ## Data Model
 
@@ -82,6 +83,35 @@ Explanation: The get_user_input method was modified to convert the valid options
 
 ### Validator Testing
 
+* PEP8
+   * Error free code checked on [CI Python Linter](https://pep8ci.herokuapp.com/#)
+   * *Errors for character length but this is not applicable due to indentation and use of \n (new line)
+
+
+
 ## Deployment
 
+This project was deployed using Code Institues mock terminal for Heroku:
+
+* Steps for deployment:
+   * Create a new Heroku app
+   * Set Config vars key to "PORT" and value to "8000"
+   * Set buildpacks to Python and NodeJS in that order
+   * Link the Heroku app to my github repository
+   * Click on deploy
+
+
 ## Credits
+
+For the inspiration and base of my code I followed this [tutorial](https://www.makeuseof.com/python-text-adventure-game-create/) and this video on [YouTube](https://www.youtube.com/watch?v=DEcFCn2ubSg)
+
+[Match case statements](https://learnpython.com/blog/python-match-case-statement/)
+[System Exit](https://stackoverflow.com/questions/14639077/how-to-use-sys-exit-in-python)
+[Clear Screen](https://www.geeksforgeeks.org/clear-screen-python/)
+[Enumerations](https://www.geeksforgeeks.org/enum-in-python/)
+
+
+
+
+
+I would like to thank my mentor Jack Wachira for his valuable help and feedback throughout this project as well as Code Institute for the deployment terminal. 

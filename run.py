@@ -1,8 +1,10 @@
+# Base of game inspiration and code https://www.youtube.com/watch?v=DEcFCn2ubSg
+# https://www.makeuseof.com/python-text-adventure-game-create/
 import os
 import sys
 from enum import StrEnum
 
-
+# Credit from https://www.geeksforgeeks.org/clear-screen-python/
 def clear_screen():
     """
     Method checks the operating system and uses appropriate command to clear
@@ -13,7 +15,7 @@ def clear_screen():
     else:
         os.system('clear')
 
-
+# Credit from https://www.geeksforgeeks.org/enum-in-python/
 class Direction(StrEnum):
     """
     Enum class to hold constant direction values
@@ -143,6 +145,7 @@ class ChernobylSurvivalGame:
             elif play_again == Decisions.NO:
                 print("Thanks for playing! See you next time.")
                 self.player_name = ""
+                # Credit https://stackoverflow.com/questions/14639077/how-to-use-sys-exit-in-python
                 sys.exit()
 
     def start_zone(self):
