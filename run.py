@@ -145,7 +145,7 @@ class ChernobylSurvivalGame:
             if play_again == Decisions.YES:
                 self.reset_game()
                 self.start_zone()
-                break
+                
             elif play_again == Decisions.NO:
                 print("Thanks for playing! See you next time.")
                 self.player_name = ""
@@ -437,7 +437,7 @@ class ChernobylSurvivalGame:
         """
 
         clear_screen()
-        print(" Upon entering the Library you are covered in radioactive dust.\nLets hope this is worth it (+1 radiation point)\n")
+        print("Upon entering the Library you are covered in radioactive dust.\nLets hope this is worth it (+1 radiation point)\n")
         self.radiation_increase(1)
         print("Inside, the dimly lit space is filled with dusty books and scattered notes,")
         print("hinting at the knowledge it holds. As you explore, you come across a cryptic")
