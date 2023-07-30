@@ -33,6 +33,30 @@ There are different ways to win and lose, depending on the players memory, luck 
 
 ### Exisiting Features
 
+![Intro Screen](./README_images/Screenshot%20(58).png)
+
+![Name input](./README_images/Screenshot%20(59).png)
+
+![Directions](./README_images/Screenshot%20(60).png)
+
+![Way to win 1](./README_images/Screenshot%20(61).png)
+
+![Radiation Death](./README_images/Screenshot%20(62).png)
+
+![Monster Death](./README_images/Screenshot%20(63).png)
+
+![Minefield Death](./README_images/Screenshot%20(64).png)
+
+![Code entry](./README_images/Screenshot%20(65).png)
+
+![Way to win 2](./README_images/Screenshot%20(66).png)
+
+![Healing](./README_images/Screenshot%20(67).png)
+ 
+
+
+
+
 ### Future Features
 
 * Count how many times the player had to restart the game in order to win.
