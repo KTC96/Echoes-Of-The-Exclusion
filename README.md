@@ -2,7 +2,7 @@
 
 Echoes Of The Exclusion is a text based survival adventure game written using python. The game allows players to explore a mysterious exlusion zone, hunting for clues, evading radiation and making key decisions. The challenging interactive game provides feedback to the player based upon their decisions and has high replay value as there are multiple ways to win an lose. 
 <br>
-![EchoesOfTheExclusion](#)
+![EchoesOfTheExclusion](./README_images/Screenshot%20(68).png)
 
 ## [Link to live site](https://echoes-of-the-exclusion-f4944290133d.herokuapp.com/)
 
@@ -33,25 +33,60 @@ There are different ways to win and lose, depending on the players memory, luck 
 
 ### Exisiting Features
 
+* Game introduction screen
+    * Introduces the scope of the game to the player.
+    * Gives the player a tip about radiation points and prompts them if they would like to play.
+    * Input validation: If the player enters a non valid character they are shown an error message and asked to input again.
+
 ![Intro Screen](./README_images/Screenshot%20(58).png)
+
+* Name input
+    * The player is asked for their name which is capitalized upon entering.
+    * Their name is stored as an instance variable so if they choose to play again they do not have to re-enter their name
 
 ![Name input](./README_images/Screenshot%20(59).png)
 
+* Direction choices
+    * The player can choose which way they would like to travel.
+    * When arrving at a destination they are greeted with a description of the area and multiple options they can pursue. Or they can head back and revisit previously visited locations
+
 ![Directions](./README_images/Screenshot%20(60).png)
+
+* Winning the game
+    * There are two ways to win the game. They can find a secret hidden meaning or find a weapon and defeat a monster
 
 ![Way to win 1](./README_images/Screenshot%20(61).png)
 
+![Way to win 2](./README_images/Screenshot%20(66).png)
+
+* Radiation points
+    * The player starts on 0 radiation points but based on their decisions this can increase. Once it reaches 3 they player recieves a message that they died from radiation exposure. 
+
 ![Radiation Death](./README_images/Screenshot%20(62).png)
+
+* Healing
+    * The player is also able to reduce their radiation points through certain in game actions.
+    * To prevent explotation of this mechanic, areas where the players radiation points are reduced can only be visited once. 
+    * If they player's radiaiton points were alredy at 0, then a message is displayed informing them of this and the radiation points are not set to a negative integer.
+
+![Healing](./README_images/Screenshot%20(67).png)
+
+* Other ways to lose the game
+    * The player can run into different scenarioes where they die.
+    * The player has to remember these dangerous zones for next time, which increases replay value.
 
 ![Monster Death](./README_images/Screenshot%20(63).png)
 
 ![Minefield Death](./README_images/Screenshot%20(64).png)
 
+* The player has to find clues and solve a puzzle to unlock the games secrets. 
+   * For example an anagram must be solved in order to unlock a safe so the player gains access to a weapon
+
 ![Code entry](./README_images/Screenshot%20(65).png)
 
-![Way to win 2](./README_images/Screenshot%20(66).png)
 
-![Healing](./README_images/Screenshot%20(67).png)
+
+
  
 
 
