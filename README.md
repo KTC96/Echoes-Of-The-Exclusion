@@ -81,6 +81,12 @@ Issue: get_user_input was case insensitve
 
 Explanation: The get_user_input method was modified to convert the valid options to uppercase to ensure case-insensitive comparison with the user's input. This prevents issues where the user might enter lowercase characters for valid options.
 
+Issue: When replaying the game, visiting the library caused duplication of print statements.
+
+Explanation:
+
+The play_again_prompt() method was being called multiple times when the player chooses to play again. Modification of the play_again_prompt() method to include a loop solved the issue. 
+
 #### Remaining Bugs
 
 There are no remaining bugs

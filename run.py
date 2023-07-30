@@ -145,9 +145,8 @@ class ChernobylSurvivalGame:
             if play_again == Decisions.YES:
                 self.reset_game()
                 self.start_zone()
-                
             elif play_again == Decisions.NO:
-                print("Thanks for playing! See you next time.")
+                print("Thanks for playing, maybe next time you can beat the Exclusion zone...")
                 self.player_name = ""
                 # Credit https://stackoverflow.com/questions/14639077/how-to-use-sys-exit-in-python
                 sys.exit()
@@ -171,7 +170,6 @@ class ChernobylSurvivalGame:
         print("haunting silence and eerie atmosphere of the exclusion zone envelop you. Nature")
         print("has reclaimed its territory, with overgrown vegetation and crumbling structures")
         print("standing as testament to the past\n")
-        
         print(f"So {self.player_name}, which way would you like to head first?\n")
         start_direction_map = {
                 Direction.NORTH.value: self.power_plant,
@@ -415,7 +413,7 @@ class ChernobylSurvivalGame:
         print("out from beneath the door, hinting at something inside.\n")
         print("You open the door and find a safe, with a strange alphabetized lock,")
         print("if only you knew the code...\n")
-        safe_code_input = input("Enter the code:\n ").upper().strip()
+        safe_code_input = input("Enter the code:\n").upper().strip()
         if safe_code_input == "RADIOACTIVE":
             clear_screen()
             print("The safe unlocks with a dull thud, inside you discover a handgun,")
@@ -466,7 +464,7 @@ class ChernobylSurvivalGame:
         enter_mine_field = self.get_user_input("Enter the minefield? (Y/N)\n", [Decisions.YES, Decisions.NO])
         if enter_mine_field == Decisions.YES:
             clear_screen()
-            print("That was not a wise decision...")
+            print("That was not a wise decision...\n")
             self.death()
         elif enter_mine_field == Decisions.NO:
             clear_screen()
@@ -487,7 +485,7 @@ class ChernobylSurvivalGame:
             Direction.EAST.value: self.start_zone_return}
 
         while True:
-            hospital_decision = self.get_user_input("Options: Search the Hospital offices, Explore the operating room, Decend into\nthe basement (1,2,3) or head back (E)\n ", hospital_decision_map.keys())
+            hospital_decision = self.get_user_input("Options: Search the Hospital offices, Explore the operating room, Decend into\nthe basement (1,2,3) or head back (E)\n", hospital_decision_map.keys())
             hospital_decision_map[hospital_decision]()
 
     def hospital_office(self):
@@ -533,7 +531,7 @@ class ChernobylSurvivalGame:
 
     def basement(self):
         clear_screen()
-        print("There does not seem to be much down here except from radioactive dust\n(+1 radiation point)")
+        print("There does not seem to be much down here except from radioactive dust\n(+1 radiation point)\n")
         self.radiation_increase(1)
         self.return_to_location("hospital")
 
