@@ -564,12 +564,22 @@ class ChernobylSurvivalGame:
             self.return_to_location("hospital")
 
     def basement(self):
+        """
+        In this method, the player heads to the basement and they are greeted with a message informing
+        them there is nothing down there, their radiation points go up by 1. They are then prompted to 
+        return to the hospital. 
+        """
         clear_screen()
         print(Fore.RED + "There does not seem to be much down here except from radioactive dust\n(+1 radiation point)\n" + Fore.RESET)
         self.radiation_increase(1)
         self.return_to_location("hospital")
 
     def win_game(self):
+        """
+        This method handles successfully winning the game. A victory message is displayed and
+        the play_again_prompt is called to reset the game and ask if they player wants to play
+        again. 
+        """
         print(Fore.GREEN + "Congratulations! You have successfully navigated through the treacherous")
         print("Exclusion Zone, overcoming countless challenges and unearthing ancient")
         print("mysteries. With determination and wit, you have survived the apocalypse and")
@@ -578,18 +588,32 @@ class ChernobylSurvivalGame:
         self.play_again_prompt()
 
     def radiation_death(self):
+        """
+        This method handles the player dying due to radiation exposure. It is called by player_info
+        method if the players radiation points reach 3. If this happens this method is called and 
+        an explanation of their death is printed. The play_again_prompt is then called to check if
+        they would like to play again. 
+        """
         print(Fore.RED + "Your radiation exposure has exceeded the critical level, your body weakens, and")
         print("you succumb to the deadly effects, leaving the Exlusion Zone as your final")
         print("resting place.\n" + Fore.RESET)
         self.play_again_prompt()
 
     def death(self):
+        """
+        This method handles all other forms of death in the game. It is called in response to certain
+        scenarioes. A statement is printed informing the player they have died and the play_again_prompt
+        is called to check if they would like to play again. 
+        """
         print(Fore.RED + "Your journey in the Exclusion Zone has come to a tragic end. The unforgiving")
         print("forces of the wasteland have claimed your life. May your memory echo through")
         print("the haunting ruins of the Exclusion Zone\n" + Fore.RESET)
         self.play_again_prompt()
 
     def radiation_increase(self, amount):
+        """
+        This method handles increasing the radiation points of the player.
+        """
         self.radiation_level += amount
         self.player_info()
 
