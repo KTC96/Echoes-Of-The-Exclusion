@@ -134,7 +134,8 @@ class ChernobylSurvivalGame:
                     Objective: Escape the Exclusion zone.
                       Your decisions decide your fate.
 
-                    Tip: Your maximum radiation points are 3
+                    Tip1: Your maximum radiation points are 3
+                    Tip2: Some scenarioes require you to scroll vertically
         """)
             decision = self.get_user_input("Would you like to play? (Y/N)\n", [Decisions.YES.value, Decisions.NO.value])
             clear_screen()
