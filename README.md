@@ -2,7 +2,8 @@
 
 Echoes Of The Exclusion is a text based survival adventure game written using python. The game allows players to explore a mysterious exlusion zone, hunting for clues, evading radiation and making key decisions. The challenging interactive game provides feedback to the player based upon their decisions and has high replay value as there are multiple ways to win an lose. 
 <br>
-![EchoesOfTheExclusion](./README_images/Screenshot%20(68).png)
+<br>
+![EchoesOfTheExclusion](./README_images/Screenshot%20(70).png)
 
 ## [Link to live site](https://echoes-of-the-exclusion-f4944290133d.herokuapp.com/)
 
@@ -38,7 +39,7 @@ There are different ways to win and lose, depending on the players memory, luck 
     * Gives the player a tip about radiation points and prompts them if they would like to play.
     * Input validation: If the player enters a non valid character they are shown an error message and asked to input again.
 
-![Intro Screen](./README_images/Screenshot%20(58).png)
+![Intro Screen](./README_images/Screenshot%20(69).png)
 
 * Name input
     * The player is asked for their name which is capitalized upon entering.
@@ -175,10 +176,13 @@ This project was deployed using Code Institues mock terminal for Heroku:
 
 For the inspiration and base of my code I followed this [tutorial](https://www.makeuseof.com/python-text-adventure-game-create/) and this video on [YouTube](https://www.youtube.com/watch?v=DEcFCn2ubSg)
 
-[Match case statements](https://learnpython.com/blog/python-match-case-statement/)
-[System Exit](https://stackoverflow.com/questions/14639077/how-to-use-sys-exit-in-python)
-[Clear Screen](https://www.geeksforgeeks.org/clear-screen-python/)
-[Enumerations](https://www.geeksforgeeks.org/enum-in-python/)
+* [Match case statements](https://learnpython.com/blog/python-match-case-statement/)
+* [System Exit](https://stackoverflow.com/questions/14639077/how-to-use-sys-exit-in-python)
+* [Clear Screen](https://www.geeksforgeeks.org/clear-screen-python/)
+* [Enumerations](https://www.geeksforgeeks.org/enum-in-python/)
+* [Colorama](https://pypi.org/project/colorama/)
+* [ASCII Art](https://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20)
+* [Responsiveness](https://ui.dev/amiresponsive)
 
 
 
