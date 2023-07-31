@@ -487,8 +487,7 @@ class ChernobylSurvivalGame:
         """
         In this method, the player reaches the hospital. The player can
         head towards the hospital offices, the operating, the basement
-        or return to the starting zone. 
-        
+        or return to the starting zone.
         """
         clear_screen()
         print("You arrive at the abandoned hospital, once a place of healing and hope. Now, it")
@@ -511,7 +510,7 @@ class ChernobylSurvivalGame:
         In this method , the player comes across a mutated dog and is then prompted to
         decide whether they want to search the hospital offices or not. If the player chooses
         to enter (input 'Y'), the player discovers a clue for the safe code in the apartment
-        complex. If the player decides not to enter (input 'N), the player returns to the 
+        complex. If the player decides not to enter (input 'N), the player returns to the
         Hospital.
         """
         clear_screen()
@@ -532,12 +531,12 @@ class ChernobylSurvivalGame:
 
     def operating_room(self):
         """
-        In this method , the player discovers a rotting corpse and they are prompted to decide 
+        In this method , the player discovers a rotting corpse and they are prompted to decide
         whether to search it. If they decide yes (input 'Y), they find a syringe labelled 'Anti-Radioactive
         particles' and their radiation points are reset to 0. If the player has previously searched the body,
         when they return to the operating room they are granted with a message informing them they have
         alredy taken the medicine. This is to stop the player exploting the reducition in radiation points
-        repeatadly. If they do not decide to search the body (input 'N) they are provided with a message 
+        repeatadly. If they do not decide to search the body (input 'N) they are provided with a message
         and are prompted to return to the hospital.
         """
         clear_screen()
@@ -566,8 +565,8 @@ class ChernobylSurvivalGame:
     def basement(self):
         """
         In this method, the player heads to the basement and they are greeted with a message informing
-        them there is nothing down there, their radiation points go up by 1. They are then prompted to 
-        return to the hospital. 
+        them there is nothing down there, their radiation points go up by 1. They are then prompted to
+        return to the hospital.
         """
         clear_screen()
         print(Fore.RED + "There does not seem to be much down here except from radioactive dust\n(+1 radiation point)\n" + Fore.RESET)
@@ -578,7 +577,7 @@ class ChernobylSurvivalGame:
         """
         This method handles successfully winning the game. A victory message is displayed and
         the play_again_prompt is called to reset the game and ask if they player wants to play
-        again. 
+        again.
         """
         print(Fore.GREEN + "Congratulations! You have successfully navigated through the treacherous")
         print("Exclusion Zone, overcoming countless challenges and unearthing ancient")
@@ -590,9 +589,9 @@ class ChernobylSurvivalGame:
     def radiation_death(self):
         """
         This method handles the player dying due to radiation exposure. It is called by player_info
-        method if the players radiation points reach 3. If this happens this method is called and 
+        method if the players radiation points reach 3. If this happens this method is called and
         an explanation of their death is printed. The play_again_prompt is then called to check if
-        they would like to play again. 
+        they would like to play again.
         """
         print(Fore.RED + "Your radiation exposure has exceeded the critical level, your body weakens, and")
         print("you succumb to the deadly effects, leaving the Exlusion Zone as your final")
@@ -603,7 +602,7 @@ class ChernobylSurvivalGame:
         """
         This method handles all other forms of death in the game. It is called in response to certain
         scenarioes. A statement is printed informing the player they have died and the play_again_prompt
-        is called to check if they would like to play again. 
+        is called to check if they would like to play again.
         """
         print(Fore.RED + "Your journey in the Exclusion Zone has come to a tragic end. The unforgiving")
         print("forces of the wasteland have claimed your life. May your memory echo through")
@@ -612,12 +611,19 @@ class ChernobylSurvivalGame:
 
     def radiation_increase(self, amount):
         """
-        This method handles increasing the radiation points of the player.
+        This method handles increasing the radiation points of the player. It increases the radiation variable
+        by the amount set in the specific scenario. It then updates the player_info with the new amount of
+        points.
         """
         self.radiation_level += amount
         self.player_info()
 
     def radiation_decrease(self, amount):
+        """
+        This method handles decreasing the radiation points of the player. It decreases the radiation variable
+        by the amount set in the specific scenario. It then updates the player_info with the new amount of
+        points.
+        """
         if self.radiation_level >= 1:
             self.radiation_level -= amount
             self.player_info()
