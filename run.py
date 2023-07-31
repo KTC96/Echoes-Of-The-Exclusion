@@ -80,7 +80,7 @@ class ChernobylSurvivalGame:
         while still wllowing the player to read the sublocation print
         statement before returning there
         """
-        return_input = self.get_user_input(f"To return to {location_name}, enter R: ", [Decisions.RETURN])
+        return_input = self.get_user_input(f"To return to {location_name.replace('_', ' ')}, enter R: ", [Decisions.RETURN])
         match return_input:
             case Decisions.RETURN.value:
                 match location_name:
@@ -463,7 +463,7 @@ class ChernobylSurvivalGame:
 
     def mine_field(self):
         """
-        In this method, the player is prompted to decide whether they wantto enter the
+        In this method, the player is prompted to decide whether they want to enter the
         minefield or not. If the player chooses to enter (input 'Y'), the player meets
         their tragic end, and the `death()` method is called. If the player decides not
         to enter (input 'N'), the player returns to the City Center.
@@ -484,6 +484,12 @@ class ChernobylSurvivalGame:
             self.return_to_location("city")
 
     def hospital(self):
+        """
+        In this method, the player reaches the hospital. The player can
+        head towards the hospital offices, the operating, the basement
+        or return to the starting zone. 
+        
+        """
         clear_screen()
         print("You arrive at the abandoned hospital, once a place of healing and hope. Now, it")
         print("stands as a haunting reminder of the past. Broken windows and overgrown ivy")
@@ -501,6 +507,13 @@ class ChernobylSurvivalGame:
             hospital_decision_map[hospital_decision]()
 
     def hospital_office(self):
+        """
+        In this method , the player comes across a mutated dog and is then prompted to
+        decide whether they want to search the hospital offices or not. If the player chooses
+        to enter (input 'Y'), the player discovers a clue for the safe code in the apartment
+        complex. If the player decides not to enter (input 'N), the player returns to the 
+        Hospital.
+        """
         clear_screen()
         print("Upon entering the abandoned hospital offices, you are startled by a chilling")
         print("sight: a mutated dog lurking in the shadows. Its disfigured apperance and")
@@ -518,6 +531,15 @@ class ChernobylSurvivalGame:
             self.return_to_location("hospital")
 
     def operating_room(self):
+        """
+        In this method , the player discovers a rotting corpse and they are prompted to decide 
+        whether to search it. If they decide yes (input 'Y), they find a syringe labelled 'Anti-Radioactive
+        particles' and their radiation points are reset to 0. If the player has previously searched the body,
+        when they return to the operating room they are granted with a message informing them they have
+        alredy taken the medicine. This is to stop the player exploting the reducition in radiation points
+        repeatadly. If they do not decide to search the body (input 'N) they are provided with a message 
+        and are prompted to return to the hospital.
+        """
         clear_screen()
         if not self.visited_sublocations["operating_room"]:
 
